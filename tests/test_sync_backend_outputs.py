@@ -88,8 +88,8 @@ class SyncBackendOutputsTest(unittest.TestCase):
             "oficina-org",
             "oficina-auth-homolog",
             "oficina-newrelic-homolog",
-            "tiagomiele/oficina-backend-fiap-fase3",
-            "tiagomiele/oficina-kubernetes-infra-fiap-fase3",
+            "tiagomiele/fiap-tech-challenge-fase3-oficina-backend",
+            "tiagomiele/fiap-tech-challenge-fase3-oficina-kubernetes-infra",
             "homolog",
         )
 
@@ -118,19 +118,19 @@ class SyncBackendOutputsTest(unittest.TestCase):
             github_client.calls,
             [
                 (
-                    "tiagomiele/oficina-backend-fiap-fase3",
+                    "tiagomiele/fiap-tech-challenge-fase3-oficina-backend",
                     "homolog",
                     "BACKEND_BASE_URL",
                     "http://backend.example.com",
                 ),
                 (
-                    "tiagomiele/oficina-kubernetes-infra-fiap-fase3",
+                    "tiagomiele/fiap-tech-challenge-fase3-oficina-kubernetes-infra",
                     "homolog",
                     "HEALTH_CHECK_URL",
                     "http://backend.example.com/actuator/health",
                 ),
                 (
-                    "tiagomiele/oficina-kubernetes-infra-fiap-fase3",
+                    "tiagomiele/fiap-tech-challenge-fase3-oficina-kubernetes-infra",
                     "homolog",
                     "SYNTHETIC_MONITOR_ENABLED",
                     "true",

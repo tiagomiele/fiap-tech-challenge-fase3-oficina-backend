@@ -1,6 +1,6 @@
 # Oficina Backend — Tech Challenge Fase 3
 
-[![CI](https://github.com/tiagomiele/oficina-backend-fiap-fase3/actions/workflows/ci.yml/badge.svg)](https://github.com/tiagomiele/oficina-backend-fiap-fase3/actions/workflows/ci.yml)
+[![CI](https://github.com/tiagomiele/fiap-tech-challenge-fase3-oficina-backend/actions/workflows/ci.yml/badge.svg)](https://github.com/tiagomiele/fiap-tech-challenge-fase3-oficina-backend/actions/workflows/ci.yml)
 
 API principal do sistema de gestão de oficina mecânica. A Fase 3 evolui a base da Fase 2 para autenticação serverless por CPF, API Gateway, infraestrutura dividida em repositórios independentes e observabilidade com New Relic.
 
@@ -37,10 +37,10 @@ flowchart LR
 
 | Repositório | Responsabilidade |
 |---|---|
-| [oficina-backend-fiap-fase3](https://github.com/tiagomiele/oficina-backend-fiap-fase3) | Aplicação principal no Kubernetes |
-| [oficina-auth-serverless-fiap-fase3](https://github.com/tiagomiele/oficina-auth-serverless-fiap-fase3) | Lambda, autenticação por CPF, JWT e API Gateway |
-| [oficina-kubernetes-infra-fiap-fase3](https://github.com/tiagomiele/oficina-kubernetes-infra-fiap-fase3) | VPC, EKS, HPA e integração Kubernetes/New Relic |
-| [oficina-database-infra-fiap-fase3](https://github.com/tiagomiele/oficina-database-infra-fiap-fase3) | RDS PostgreSQL e infraestrutura de dados |
+| [fiap-tech-challenge-fase3-oficina-backend](https://github.com/tiagomiele/fiap-tech-challenge-fase3-oficina-backend) | Aplicação principal no Kubernetes |
+| [fiap-tech-challenge-fase3-oficina-auth-serverless](https://github.com/tiagomiele/fiap-tech-challenge-fase3-oficina-auth-serverless) | Lambda, autenticação por CPF, JWT e API Gateway |
+| [fiap-tech-challenge-fase3-oficina-kubernetes-infra](https://github.com/tiagomiele/fiap-tech-challenge-fase3-oficina-kubernetes-infra) | VPC, EKS, HPA e integração Kubernetes/New Relic |
+| [fiap-tech-challenge-fase3-oficina-database-infra](https://github.com/tiagomiele/fiap-tech-challenge-fase3-oficina-database-infra) | RDS PostgreSQL e infraestrutura de dados |
 
 ## Tecnologias
 

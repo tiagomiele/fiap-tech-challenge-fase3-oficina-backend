@@ -4,7 +4,7 @@
 
 .DESCRIPTION
   Na Fase 3, o banco gerenciado pertence ao repositório
-  oficina-database-infra-fiap-fase3. A aplicação usa o RDS provisionado por ele.
+  fiap-tech-challenge-fase3-oficina-database-infra. A aplicação usa o RDS provisionado por ele.
 
   Este script:
     1. Descobre o endpoint do RDS automaticamente (evita o bug de host vazio).
@@ -20,7 +20,7 @@
   Regiao AWS. Padrao: us-west-2.
 
 .PARAMETER Image
-  Imagem do container. Padrao: ghcr.io/tiagomiele/oficina-backend-fiap-fase3:latest
+  Imagem do container. Padrao: ghcr.io/tiagomiele/fiap-tech-challenge-fase3-oficina-backend:latest
 
 .PARAMETER JwtSecret
   Segredo usado para assinar os JWT. Se nao informado, e gerado um valor
@@ -61,7 +61,7 @@ param(
   [Parameter(Mandatory = $true)]
   [string]$DbPassword,
   [string]$Region        = "us-west-2",
-  [string]$Image         = "ghcr.io/tiagomiele/oficina-backend-fiap-fase3:latest",
+  [string]$Image         = "ghcr.io/tiagomiele/fiap-tech-challenge-fase3-oficina-backend:latest",
   [string]$JwtSecret     = $env:JWT_SECRET,
   [string]$AdminPassword = $env:ADMIN_PASSWORD,
   [string]$DbInstanceId  = "oficina-homolog-db",

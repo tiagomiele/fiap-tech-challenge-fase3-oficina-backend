@@ -585,7 +585,7 @@ function gh {
     $script:ghCalls += , @($Arguments)
     $global:LASTEXITCODE = 0
 }
-Set-GitHubSecret -Repository oficina-backend-fiap-fase3 -EnvironmentName homolog -Name APP_ADMIN_PASSWORD -Value 'senha-sem-quebra'
+Set-GitHubSecret -Repository fiap-tech-challenge-fase3-oficina-backend -EnvironmentName homolog -Name APP_ADMIN_PASSWORD -Value 'senha-sem-quebra'
 if ($script:ghCalls.Count -ne 1) {
     throw 'Secret update must call the GitHub CLI once.'
 }

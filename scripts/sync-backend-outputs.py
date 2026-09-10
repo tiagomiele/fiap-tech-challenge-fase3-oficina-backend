@@ -266,11 +266,11 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--newrelic-workspace", required=True)
     parser.add_argument(
         "--backend-repository",
-        default="tiagomiele/oficina-backend-fiap-fase3",
+        default="tiagomiele/fiap-tech-challenge-fase3-oficina-backend",
     )
     parser.add_argument(
         "--kubernetes-repository",
-        default="tiagomiele/oficina-kubernetes-infra-fiap-fase3",
+        default="tiagomiele/fiap-tech-challenge-fase3-oficina-kubernetes-infra",
     )
     parser.add_argument("--environment", choices=("homolog", "production"), required=True)
     return parser.parse_args()

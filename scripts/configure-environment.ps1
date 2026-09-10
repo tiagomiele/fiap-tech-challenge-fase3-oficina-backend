@@ -32,10 +32,10 @@ if ($RequireBackendDeployReady -and $SkipGitHub) {
 }
 
 $RepositoryNames = @{
-    Kubernetes = 'oficina-kubernetes-infra-fiap-fase3'
-    Database   = 'oficina-database-infra-fiap-fase3'
-    Backend    = 'oficina-backend-fiap-fase3'
-    Auth       = 'oficina-auth-serverless-fiap-fase3'
+    Kubernetes = 'fiap-tech-challenge-fase3-oficina-kubernetes-infra'
+    Database   = 'fiap-tech-challenge-fase3-oficina-database-infra'
+    Backend    = 'fiap-tech-challenge-fase3-oficina-backend'
+    Auth       = 'fiap-tech-challenge-fase3-oficina-auth-serverless'
 }
 $GitHubOwner = 'tiagomiele'
 $WorkspaceNames = @{
