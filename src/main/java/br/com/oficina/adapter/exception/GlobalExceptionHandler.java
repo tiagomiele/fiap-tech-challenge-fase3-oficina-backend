@@ -148,10 +148,14 @@ public class GlobalExceptionHandler {
   }
 
   private void registrarFalhaOrdemServico(HttpServletRequest req, String codigoErro) {
-    Matcher matcher = ORDEM_SERVICO_PATH.matcher(req.getRequestURI());
-    if (matcher.find()) {
-      observabilidade.ordemServicoProcessamentoFalhou(
-          matcher.group(1), req.getMethod(), codigoErro);
+    try {
+      Matcher matcher = ORDEM_SERVICO_PATH.matcher(req.getRequestURI());
+      if (matcher.find()) {
+        observabilidade.ordemServicoProcessamentoFalhou(
+            matcher.group(1), req.getMethod(), codigoErro);
+      }
+    } catch (RuntimeException exception) {
+      log.warn("Falha ao registrar erro da ordem de serviço na observabilidade", exception);
     }
   }
 
