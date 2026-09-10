@@ -83,10 +83,10 @@ Não prossiga se algum comando falhar. O script usa o OpenSSL incluído no Git f
 Confirme que os repositórios estão nestes diretórios ou adapte todos os caminhos deste guia:
 
 ```text
-C:\fiap-fase3\oficina-kubernetes-infra-fiap-fase3
-C:\fiap-fase3\oficina-database-infra-fiap-fase3
-C:\fiap-fase3\oficina-backend-fiap-fase3
-C:\fiap-fase3\oficina-auth-serverless-fiap-fase3
+C:\fiap-fase3\fiap-tech-challenge-fase3-oficina-kubernetes-infra
+C:\fiap-fase3\fiap-tech-challenge-fase3-oficina-database-infra
+C:\fiap-fase3\fiap-tech-challenge-fase3-oficina-backend
+C:\fiap-fase3\fiap-tech-challenge-fase3-oficina-auth-serverless
 ```
 
 ---
@@ -98,7 +98,7 @@ Execute os comandos em cada repositório. Não use uma branch `devin/*` para a v
 ### 2.1 Kubernetes
 
 ```powershell
-Set-Location C:\fiap-fase3\oficina-kubernetes-infra-fiap-fase3
+Set-Location C:\fiap-fase3\fiap-tech-challenge-fase3-oficina-kubernetes-infra
 git switch homolog
 git pull --ff-only
 git status --short
@@ -107,7 +107,7 @@ git status --short
 ### 2.2 Banco
 
 ```powershell
-Set-Location C:\fiap-fase3\oficina-database-infra-fiap-fase3
+Set-Location C:\fiap-fase3\fiap-tech-challenge-fase3-oficina-database-infra
 git switch homolog
 git pull --ff-only
 git status --short
@@ -116,7 +116,7 @@ git status --short
 ### 2.3 Backend
 
 ```powershell
-Set-Location C:\fiap-fase3\oficina-backend-fiap-fase3
+Set-Location C:\fiap-fase3\fiap-tech-challenge-fase3-oficina-backend
 git switch homolog
 git pull --ff-only
 git status --short
@@ -125,7 +125,7 @@ git status --short
 ### 2.4 Autenticação
 
 ```powershell
-Set-Location C:\fiap-fase3\oficina-auth-serverless-fiap-fase3
+Set-Location C:\fiap-fase3\fiap-tech-challenge-fase3-oficina-auth-serverless
 git switch homolog
 git pull --ff-only
 git status --short
@@ -139,9 +139,9 @@ Execute esta subseção apenas se `terraform version` mostrava `windows_386` e f
 
 ```powershell
 $TerraformRepositories = @(
-  'C:\fiap-fase3\oficina-kubernetes-infra-fiap-fase3',
-  'C:\fiap-fase3\oficina-database-infra-fiap-fase3',
-  'C:\fiap-fase3\oficina-auth-serverless-fiap-fase3'
+  'C:\fiap-fase3\fiap-tech-challenge-fase3-oficina-kubernetes-infra',
+  'C:\fiap-fase3\fiap-tech-challenge-fase3-oficina-database-infra',
+  'C:\fiap-fase3\fiap-tech-challenge-fase3-oficina-auth-serverless'
 )
 foreach ($Repository in $TerraformRepositories) {
   $Cache = Join-Path $Repository '.terraform'
@@ -187,7 +187,7 @@ Na primeira execução de um ambiente, informe os valores atuais já usados pela
 4. valide acessos sem alterar arquivos, HCP ou GitHub:
 
 ```powershell
-Set-Location C:\fiap-fase3\oficina-backend-fiap-fase3
+Set-Location C:\fiap-fase3\fiap-tech-challenge-fase3-oficina-backend
 .\scripts\configure-environment.ps1 -Environment homolog -ValidateOnly
 ```
 
@@ -306,7 +306,7 @@ As seções 5 a 23 executam homologação. A sequência completa e parametrizada
 ### 5.1 Confirmar o código
 
 ```powershell
-Set-Location C:\fiap-fase3\oficina-kubernetes-infra-fiap-fase3
+Set-Location C:\fiap-fase3\fiap-tech-challenge-fase3-oficina-kubernetes-infra
 Select-String -Path .\variables.tf -Pattern 'default\s+=\s+"1.34"'
 Select-String -Path .\environments\homolog.tfvars.example -Pattern 'cluster_version\s+=\s+"1.34"'
 terraform fmt -check -recursive
@@ -323,7 +323,7 @@ Não cadastre `lab_role_arn`, `private_subnet_ids` ou credenciais AWS diretament
 ### 5.3 Executar o plan
 
 ```powershell
-Set-Location C:\fiap-fase3\oficina-kubernetes-infra-fiap-fase3
+Set-Location C:\fiap-fase3\fiap-tech-challenge-fase3-oficina-kubernetes-infra
 $env:TF_CLOUD_ORGANIZATION = 'oficina-fiap-soat-fase-2'
 $env:TF_WORKSPACE = 'oficina-kubernetes-homolog'
 terraform init -input=false -lockfile=readonly
@@ -384,7 +384,7 @@ Após o apply:
 
 ```powershell
 terraform output
-Set-Location C:\fiap-fase3\oficina-backend-fiap-fase3
+Set-Location C:\fiap-fase3\fiap-tech-challenge-fase3-oficina-backend
 .\scripts\configure-environment.ps1 -Environment homolog
 ```
 
@@ -420,7 +420,7 @@ Esses defaults econômicos são adequados apenas ao AWS Academy. Em produção r
 ### 6.2 Executar o plan do banco
 
 ```powershell
-Set-Location C:\fiap-fase3\oficina-database-infra-fiap-fase3
+Set-Location C:\fiap-fase3\fiap-tech-challenge-fase3-oficina-database-infra
 $env:TF_CLOUD_ORGANIZATION = 'oficina-fiap-soat-fase-2'
 $env:TF_WORKSPACE = 'oficina-database-homolog'
 terraform init -input=false -lockfile=readonly
@@ -455,7 +455,7 @@ Após `Apply complete`:
 
 ```powershell
 terraform output
-Set-Location C:\fiap-fase3\oficina-backend-fiap-fase3
+Set-Location C:\fiap-fase3\fiap-tech-challenge-fase3-oficina-backend
 .\scripts\configure-environment.ps1 `
   -Environment homolog `
   -RequireBackendDeployReady
@@ -492,7 +492,7 @@ Se já existe infraestrutura, informe os secrets atuais na primeira execução p
 ## 8. Validar o backend localmente
 
 ```powershell
-Set-Location C:\fiap-fase3\oficina-backend-fiap-fase3
+Set-Location C:\fiap-fase3\fiap-tech-challenge-fase3-oficina-backend
 .\mvnw.cmd -B clean spotless:check verify
 ```
 
@@ -510,7 +510,7 @@ Esses testes verificam JWT administrativo HMAC, JWT de cliente RSA, propriedade 
 ## 9. Validar e empacotar a autenticação localmente
 
 ```powershell
-Set-Location C:\fiap-fase3\oficina-auth-serverless-fiap-fase3
+Set-Location C:\fiap-fase3\fiap-tech-challenge-fase3-oficina-auth-serverless
 .\mvnw.cmd -B clean verify spotless:check
 Test-Path .\target\oficina-auth.jar
 ```
@@ -602,7 +602,7 @@ Nenhuma variável ou secret desta seção deve ser cadastrada manualmente. O com
 Antes do deploy, reexecute:
 
 ```powershell
-Set-Location C:\fiap-fase3\oficina-backend-fiap-fase3
+Set-Location C:\fiap-fase3\fiap-tech-challenge-fase3-oficina-backend
 .\scripts\configure-environment.ps1 -Environment homolog
 ```
 
@@ -617,13 +617,13 @@ O backend recebe somente a chave pública RSA. A chave privada permanece no dire
 A pipeline publica a imagem em:
 
 ```text
-ghcr.io/tiagomiele/oficina-backend-fiap-fase3
+ghcr.io/tiagomiele/fiap-tech-challenge-fase3-oficina-backend
 ```
 
 O Deployment atual não possui `imagePullSecret`; portanto, esta entrega exige que o pacote GHCR seja público:
 
 1. abra https://github.com/tiagomiele?tab=packages;
-2. selecione `oficina-backend-fiap-fase3`;
+2. selecione `fiap-tech-challenge-fase3-oficina-backend`;
 3. abra **Package settings**;
 4. em **Danger Zone → Change package visibility**, selecione **Public**;
 5. confirme o nome do pacote quando solicitado;
@@ -947,7 +947,7 @@ Região, issuer, audience e TTL usam defaults versionados. A `LabRole` é deriva
 ### 17.1 Recriar o JAR
 
 ```powershell
-Set-Location C:\fiap-fase3\oficina-auth-serverless-fiap-fase3
+Set-Location C:\fiap-fase3\fiap-tech-challenge-fase3-oficina-auth-serverless
 .\mvnw.cmd -B -DskipTests package
 Test-Path .\target\oficina-auth.jar
 ```
@@ -1001,7 +1001,7 @@ $apiBase
 Não prossiga se os outputs estiverem vazios. Em seguida, reexecute o script central para sincronizar a URL do API Gateway com o backend:
 
 ```powershell
-Set-Location C:\fiap-fase3\oficina-backend-fiap-fase3
+Set-Location C:\fiap-fase3\fiap-tech-challenge-fase3-oficina-backend
 .\scripts\configure-environment.ps1 -Environment homolog
 ```
 
@@ -1344,7 +1344,7 @@ Não reutilize variáveis do PowerShell de homologação. Produção possui stat
 Abra um PowerShell novo, inicie o Learner Lab e copie novamente o bloco `[default]` completo para o clipboard. Sem copiar outro texto, configure somente produção. O comando padrão sincroniza o perfil real: RDS Multi-AZ, proteção contra exclusão e snapshot final.
 
 ```powershell
-Set-Location C:\fiap-fase3\oficina-backend-fiap-fase3
+Set-Location C:\fiap-fase3\fiap-tech-challenge-fase3-oficina-backend
 .\scripts\configure-environment.ps1 -Environment production -ValidateOnly
 .\scripts\configure-environment.ps1 -Environment production
 . C:\fiap-secrets\oficina-production\environment-context.ps1
@@ -1361,7 +1361,7 @@ Esse override desliga Multi-AZ, proteção e snapshot final somente no workspace
 #### 24.1.1 Kubernetes de produção
 
 ```powershell
-Set-Location C:\fiap-fase3\oficina-kubernetes-infra-fiap-fase3
+Set-Location C:\fiap-fase3\fiap-tech-challenge-fase3-oficina-kubernetes-infra
 git switch main
 git pull --ff-only
 $env:TF_CLOUD_ORGANIZATION = 'oficina-fiap-soat-fase-2'
@@ -1376,14 +1376,14 @@ Pare se o plan contiver exclusões inesperadas. Após autorização de custo, ex
 
 ```powershell
 terraform output
-Set-Location C:\fiap-fase3\oficina-backend-fiap-fase3
+Set-Location C:\fiap-fase3\fiap-tech-challenge-fase3-oficina-backend
 .\scripts\configure-environment.ps1 -Environment production
 ```
 
 #### 24.1.2 RDS de produção
 
 ```powershell
-Set-Location C:\fiap-fase3\oficina-database-infra-fiap-fase3
+Set-Location C:\fiap-fase3\fiap-tech-challenge-fase3-oficina-database-infra
 git switch main
 git pull --ff-only
 $env:TF_CLOUD_ORGANIZATION = 'oficina-fiap-soat-fase-2'
@@ -1398,7 +1398,7 @@ Após revisar e autorizar o custo, execute `terraform apply` e digite `yes`. Dep
 
 ```powershell
 terraform output
-Set-Location C:\fiap-fase3\oficina-backend-fiap-fase3
+Set-Location C:\fiap-fase3\fiap-tech-challenge-fase3-oficina-backend
 .\scripts\configure-environment.ps1 -Environment production
 . C:\fiap-secrets\oficina-production\environment-context.ps1
 ```
@@ -1425,7 +1425,7 @@ O próprio `Deploy PRODUÇÃO` sincroniza o LoadBalancer depois do smoke test. C
 #### 24.1.4 Autenticação de produção
 
 ```powershell
-Set-Location C:\fiap-fase3\oficina-auth-serverless-fiap-fase3
+Set-Location C:\fiap-fase3\fiap-tech-challenge-fase3-oficina-auth-serverless
 git switch main
 git pull --ff-only
 .\mvnw.cmd -B clean verify spotless:check
@@ -1441,7 +1441,7 @@ Após autorização, execute `terraform apply`, revise e digite `yes`. Depois:
 
 ```powershell
 terraform output
-Set-Location C:\fiap-fase3\oficina-backend-fiap-fase3
+Set-Location C:\fiap-fase3\fiap-tech-challenge-fase3-oficina-backend
 .\scripts\configure-environment.ps1 -Environment production
 . C:\fiap-secrets\oficina-production\environment-context.ps1
 if ([string]::IsNullOrWhiteSpace($apiBase)) { throw 'API Gateway de produção ausente no contexto.' }
@@ -1454,7 +1454,7 @@ aws apigatewayv2 get-apis --query "Items[?Name=='oficina-auth-production-http-ap
 #### 24.1.5 Add-ons e observabilidade de produção
 
 ```powershell
-Set-Location C:\fiap-fase3\oficina-backend-fiap-fase3
+Set-Location C:\fiap-fase3\fiap-tech-challenge-fase3-oficina-backend
 .\scripts\configure-environment.ps1 -Environment production -ConfigureNewRelic
 ```
 
@@ -1471,7 +1471,7 @@ Esta configuração não cria recursos AWS. Dashboards, alertas e monitor sinté
 
 
 ```powershell
-Set-Location C:\fiap-fase3\oficina-backend-fiap-fase3
+Set-Location C:\fiap-fase3\fiap-tech-challenge-fase3-oficina-backend
 .\scripts\configure-environment.ps1 -Environment homolog -ConfigureNewRelic
 ```
 
@@ -1486,7 +1486,7 @@ O script central cria ou atualiza os environments `homolog` e `production` nos q
 Não copie secrets ou IDs pelo formulário do GitHub. Reexecute:
 
 ```powershell
-Set-Location C:\fiap-fase3\oficina-backend-fiap-fase3
+Set-Location C:\fiap-fase3\fiap-tech-challenge-fase3-oficina-backend
 .\scripts\configure-environment.ps1 -Environment homolog
 ```
 
@@ -1509,7 +1509,7 @@ Os logs registram conexões, desconexões e consultas lentas sem habilitar `log_
 Execute apenas o plan:
 
 ```powershell
-Set-Location C:\fiap-fase3\oficina-database-infra-fiap-fase3
+Set-Location C:\fiap-fase3\fiap-tech-challenge-fase3-oficina-database-infra
 $env:TF_CLOUD_ORGANIZATION = 'oficina-fiap-soat-fase-2'
 $env:TF_WORKSPACE = 'oficina-database-homolog'
 terraform init -input=false -lockfile=readonly
@@ -1553,7 +1553,7 @@ Se houver `CrashLoopBackOff` no namespace `newrelic`, confira a License key no G
 Primeiro execute um plan sem apply:
 
 ```powershell
-Set-Location C:\fiap-fase3\oficina-kubernetes-infra-fiap-fase3\observability\newrelic
+Set-Location C:\fiap-fase3\fiap-tech-challenge-fase3-oficina-kubernetes-infra\observability\newrelic
 $env:TF_CLOUD_ORGANIZATION = 'oficina-fiap-soat-fase-2'
 $env:TF_WORKSPACE = 'oficina-newrelic-homolog'
 terraform init -input=false -lockfile=readonly
@@ -1571,7 +1571,7 @@ Confirme que o plan cria:
 Depois do backend publicar `$backendUrl`, não altere o workspace manualmente. Reexecute:
 
 ```powershell
-Set-Location C:\fiap-fase3\oficina-backend-fiap-fase3
+Set-Location C:\fiap-fase3\fiap-tech-challenge-fase3-oficina-backend
 .\scripts\configure-environment.ps1 -Environment homolog -ConfigureNewRelic
 ```
 
@@ -1610,9 +1610,9 @@ Criação e transições devem aparecer depois do fluxo. Eventos de falha podem 
 Não configure variáveis manualmente no workspace `oficina-auth-homolog`. Antes do plan da autenticação, execute:
 
 ```powershell
-Set-Location C:\fiap-fase3\oficina-backend-fiap-fase3
+Set-Location C:\fiap-fase3\fiap-tech-challenge-fase3-oficina-backend
 .\scripts\configure-environment.ps1 -Environment homolog -ConfigureNewRelic
-Set-Location C:\fiap-fase3\oficina-auth-serverless-fiap-fase3
+Set-Location C:\fiap-fase3\fiap-tech-challenge-fase3-oficina-auth-serverless
 $env:TF_CLOUD_ORGANIZATION = 'oficina-fiap-soat-fase-2'
 $env:TF_WORKSPACE = 'oficina-auth-homolog'
 terraform init -input=false -lockfile=readonly
@@ -1646,7 +1646,7 @@ Para repetir localmente, use parâmetros explícitos e entrada de senha oculta:
 
 ```powershell
 npm install --global newman@6.2.1 --ignore-scripts
-Set-Location C:\fiap-fase3\oficina-backend-fiap-fase3
+Set-Location C:\fiap-fase3\fiap-tech-challenge-fase3-oficina-backend
 . C:\fiap-secrets\oficina-homolog\environment-context.ps1
 $adminSecure = Read-Host 'Digite APP_ADMIN_PASSWORD' -AsSecureString
 $pointer = [Runtime.InteropServices.Marshal]::SecureStringToBSTR($adminSecure)
@@ -1672,7 +1672,7 @@ Resultado esperado: zero assertions com falha.
 Instale k6 e execute apenas em homologação, nunca durante outra turma usando o laboratório:
 
 ```powershell
-Set-Location C:\fiap-fase3\oficina-backend-fiap-fase3
+Set-Location C:\fiap-fase3\fiap-tech-challenge-fase3-oficina-backend
 $env:BACKEND_BASE_URL = $backendUrl
 $env:API_GATEWAY_BASE_URL = $apiBase
 $env:OWNER_TOKEN = $tokenOwner
@@ -1747,9 +1747,9 @@ helm rollback metrics-server $metricsRevision -n kube-system --wait
 Desative a instrumentação e os monitores pelo script, sem editar HCP/GitHub:
 
 ```powershell
-Set-Location C:\fiap-fase3\oficina-backend-fiap-fase3
+Set-Location C:\fiap-fase3\fiap-tech-challenge-fase3-oficina-backend
 .\scripts\configure-environment.ps1 -Environment homolog -DisableObservability
-Set-Location C:\fiap-fase3\oficina-kubernetes-infra-fiap-fase3\observability\newrelic
+Set-Location C:\fiap-fase3\fiap-tech-challenge-fase3-oficina-kubernetes-infra\observability\newrelic
 $env:TF_WORKSPACE = 'oficina-newrelic-homolog'
 terraform init -input=false -lockfile=readonly
 terraform plan -input=false -no-color
@@ -1776,7 +1776,7 @@ Revise o plan. Se ele contiver somente a desativação esperada, execute `terraf
 Depois de coletar as evidências, abra um PowerShell novo. Os comandos abaixo são para homologação; para produção substitua `homolog` por `production` somente depois de confirmar o ambiente.
 
 ```powershell
-Set-Location C:\fiap-fase3\oficina-backend-fiap-fase3
+Set-Location C:\fiap-fase3\fiap-tech-challenge-fase3-oficina-backend
 .\scripts\configure-environment.ps1 -Environment homolog
 . C:\fiap-secrets\oficina-homolog\environment-context.ps1
 aws sts get-caller-identity
@@ -1787,7 +1787,7 @@ Não continue se o STS falhar ou se a conta retornada não for a conta atual do 
 ### 37.1 Destruir autenticação/API Gateway
 
 ```powershell
-Set-Location C:\fiap-fase3\oficina-auth-serverless-fiap-fase3
+Set-Location C:\fiap-fase3\fiap-tech-challenge-fase3-oficina-auth-serverless
 $env:TF_CLOUD_ORGANIZATION = 'oficina-fiap-soat-fase-2'
 $env:TF_WORKSPACE = 'oficina-auth-homolog'
 terraform init -input=false -lockfile=readonly
@@ -1800,7 +1800,7 @@ Revise o plan e digite `yes`. Confirme que Lambdas e API Gateway foram removidos
 ### 37.2 Destruir observabilidade gerenciada pelo Terraform
 
 ```powershell
-Set-Location C:\fiap-fase3\oficina-kubernetes-infra-fiap-fase3\observability\newrelic
+Set-Location C:\fiap-fase3\fiap-tech-challenge-fase3-oficina-kubernetes-infra\observability\newrelic
 $env:TF_WORKSPACE = 'oficina-newrelic-homolog'
 terraform init -input=false -lockfile=readonly
 terraform plan -destroy -input=false -no-color
@@ -1825,7 +1825,7 @@ Aceite `not found` somente quando o recurso já estiver ausente. Não prossiga e
 ### 37.4 Destruir RDS
 
 ```powershell
-Set-Location C:\fiap-fase3\oficina-database-infra-fiap-fase3
+Set-Location C:\fiap-fase3\fiap-tech-challenge-fase3-oficina-database-infra
 $env:TF_WORKSPACE = 'oficina-database-homolog'
 terraform init -input=false -lockfile=readonly
 terraform plan -destroy -input=false -no-color
@@ -1837,7 +1837,7 @@ Revise e digite `yes`. Aguarde até o RDS desaparecer do console AWS.
 ### 37.5 Destruir EKS e rede por último
 
 ```powershell
-Set-Location C:\fiap-fase3\oficina-kubernetes-infra-fiap-fase3
+Set-Location C:\fiap-fase3\fiap-tech-challenge-fase3-oficina-kubernetes-infra
 $env:TF_WORKSPACE = 'oficina-kubernetes-homolog'
 terraform init -input=false -lockfile=readonly
 terraform plan -destroy -input=false -no-color

@@ -24,7 +24,7 @@ Ainda não fazem parte desta etapa:
 - integração ativa com New Relic;
 - histórico de status da Ordem de Serviço.
 
-A separação física do Terraform legado da Fase 2 será realizada na Semana 2. Nesta etapa foram definidos os limites e criados os repositórios de destino; os arquivos antigos em `oficina-backend-fiap-fase3/infra` não devem receber evoluções da Fase 3.
+A separação física do Terraform legado da Fase 2 será realizada na Semana 2. Nesta etapa foram definidos os limites e criados os repositórios de destino; os arquivos antigos em `fiap-tech-challenge-fase3-oficina-backend/infra` não devem receber evoluções da Fase 3.
 
 > O Swagger local em `http://localhost:8080/swagger-ui/index.html` documenta apenas a aplicação Spring Boot. O `POST /auth/cpf` está definido como contrato, mas será implementado no serviço serverless e exposto pelo API Gateway na Semana 3.
 
@@ -49,10 +49,10 @@ py -m pip install pyyaml
 
 Abra os quatro Pull Requests:
 
-1. [Aplicação principal](https://github.com/tiagomiele/oficina-backend-fiap-fase3/pull/1)
-2. [Autenticação serverless](https://github.com/tiagomiele/oficina-auth-serverless-fiap-fase3/pull/1)
-3. [Infraestrutura Kubernetes](https://github.com/tiagomiele/oficina-kubernetes-infra-fiap-fase3/pull/1)
-4. [Infraestrutura do banco](https://github.com/tiagomiele/oficina-database-infra-fiap-fase3/pull/1)
+1. [Aplicação principal](https://github.com/tiagomiele/fiap-tech-challenge-fase3-oficina-backend/pull/1)
+2. [Autenticação serverless](https://github.com/tiagomiele/fiap-tech-challenge-fase3-oficina-auth-serverless/pull/1)
+3. [Infraestrutura Kubernetes](https://github.com/tiagomiele/fiap-tech-challenge-fase3-oficina-kubernetes-infra/pull/1)
+4. [Infraestrutura do banco](https://github.com/tiagomiele/fiap-tech-challenge-fase3-oficina-database-infra/pull/1)
 
 Resultado esperado:
 
@@ -64,10 +64,10 @@ Resultado esperado:
 Com GitHub CLI, a mesma conferência pode ser feita com:
 
 ```powershell
-gh pr checks 1 --repo tiagomiele/oficina-backend-fiap-fase3
-gh pr checks 1 --repo tiagomiele/oficina-auth-serverless-fiap-fase3
-gh pr checks 1 --repo tiagomiele/oficina-kubernetes-infra-fiap-fase3
-gh pr checks 1 --repo tiagomiele/oficina-database-infra-fiap-fase3
+gh pr checks 1 --repo tiagomiele/fiap-tech-challenge-fase3-oficina-backend
+gh pr checks 1 --repo tiagomiele/fiap-tech-challenge-fase3-oficina-auth-serverless
+gh pr checks 1 --repo tiagomiele/fiap-tech-challenge-fase3-oficina-kubernetes-infra
+gh pr checks 1 --repo tiagomiele/fiap-tech-challenge-fase3-oficina-database-infra
 ```
 
 ## 4. Preparar os repositórios localmente
@@ -82,10 +82,10 @@ Set-Location C:\fiap-fase3
 Clone os quatro repositórios, caso ainda não estejam no computador:
 
 ```powershell
-git clone https://github.com/tiagomiele/oficina-backend-fiap-fase3.git
-git clone https://github.com/tiagomiele/oficina-auth-serverless-fiap-fase3.git
-git clone https://github.com/tiagomiele/oficina-kubernetes-infra-fiap-fase3.git
-git clone https://github.com/tiagomiele/oficina-database-infra-fiap-fase3.git
+git clone https://github.com/tiagomiele/fiap-tech-challenge-fase3-oficina-backend.git
+git clone https://github.com/tiagomiele/fiap-tech-challenge-fase3-oficina-auth-serverless.git
+git clone https://github.com/tiagomiele/fiap-tech-challenge-fase3-oficina-kubernetes-infra.git
+git clone https://github.com/tiagomiele/fiap-tech-challenge-fase3-oficina-database-infra.git
 ```
 
 ### Antes do merge dos PRs
@@ -93,13 +93,13 @@ git clone https://github.com/tiagomiele/oficina-database-infra-fiap-fase3.git
 Use as branches dos Pull Requests:
 
 ```powershell
-git -C .\oficina-backend-fiap-fase3 fetch origin devin/1786058029-week1-architecture
-git -C .\oficina-backend-fiap-fase3 switch devin/1786058029-week1-architecture
+git -C .\fiap-tech-challenge-fase3-oficina-backend fetch origin devin/1786058029-week1-architecture
+git -C .\fiap-tech-challenge-fase3-oficina-backend switch devin/1786058029-week1-architecture
 
 $reposNovos = @(
-  'oficina-auth-serverless-fiap-fase3',
-  'oficina-kubernetes-infra-fiap-fase3',
-  'oficina-database-infra-fiap-fase3'
+  'fiap-tech-challenge-fase3-oficina-auth-serverless',
+  'fiap-tech-challenge-fase3-oficina-kubernetes-infra',
+  'fiap-tech-challenge-fase3-oficina-database-infra'
 )
 
 foreach ($repo in $reposNovos) {
@@ -114,10 +114,10 @@ Use a `main` atualizada:
 
 ```powershell
 $repos = @(
-  'oficina-backend-fiap-fase3',
-  'oficina-auth-serverless-fiap-fase3',
-  'oficina-kubernetes-infra-fiap-fase3',
-  'oficina-database-infra-fiap-fase3'
+  'fiap-tech-challenge-fase3-oficina-backend',
+  'fiap-tech-challenge-fase3-oficina-auth-serverless',
+  'fiap-tech-challenge-fase3-oficina-kubernetes-infra',
+  'fiap-tech-challenge-fase3-oficina-database-infra'
 )
 
 foreach ($repo in $repos) {
@@ -132,10 +132,10 @@ Execute:
 
 ```powershell
 $repos = @(
-  'oficina-backend-fiap-fase3',
-  'oficina-auth-serverless-fiap-fase3',
-  'oficina-kubernetes-infra-fiap-fase3',
-  'oficina-database-infra-fiap-fase3'
+  'fiap-tech-challenge-fase3-oficina-backend',
+  'fiap-tech-challenge-fase3-oficina-auth-serverless',
+  'fiap-tech-challenge-fase3-oficina-kubernetes-infra',
+  'fiap-tech-challenge-fase3-oficina-database-infra'
 )
 
 foreach ($repo in $repos) {
@@ -158,33 +158,33 @@ Na pasta `C:\fiap-fase3`, execute:
 
 ```powershell
 $requiredFiles = @(
-  'oficina-backend-fiap-fase3\README.md',
-  'oficina-backend-fiap-fase3\docs\README.md',
-  'oficina-backend-fiap-fase3\docs\architecture\overview.md',
-  'oficina-backend-fiap-fase3\docs\architecture\repository-boundaries.md',
-  'oficina-backend-fiap-fase3\docs\architecture\authentication-flow.md',
-  'oficina-backend-fiap-fase3\docs\architecture\observability-new-relic.md',
-  'oficina-backend-fiap-fase3\docs\architecture\database-evolution.md',
-  'oficina-backend-fiap-fase3\docs\contracts\authentication-api.yaml',
-  'oficina-backend-fiap-fase3\docs\decisions\rfc\0001-aws-academy-and-environments.md',
-  'oficina-backend-fiap-fase3\docs\decisions\rfc\0002-cpf-authentication.md',
-  'oficina-backend-fiap-fase3\docs\decisions\adr\0001-four-repositories.md',
-  'oficina-backend-fiap-fase3\docs\decisions\adr\0002-new-relic.md',
-  'oficina-backend-fiap-fase3\docs\decisions\adr\0003-jwt-signing.md',
-  'oficina-backend-fiap-fase3\docs\roadmap\phase3.md',
-  'oficina-backend-fiap-fase3\docs\validation\week1.md',
-  'oficina-auth-serverless-fiap-fase3\docs\architecture.md',
-  'oficina-auth-serverless-fiap-fase3\docs\security.md',
-  'oficina-auth-serverless-fiap-fase3\docs\deployment.md',
-  'oficina-auth-serverless-fiap-fase3\.github\workflows\ci.yml',
-  'oficina-kubernetes-infra-fiap-fase3\docs\architecture.md',
-  'oficina-kubernetes-infra-fiap-fase3\docs\aws-academy.md',
-  'oficina-kubernetes-infra-fiap-fase3\docs\new-relic.md',
-  'oficina-kubernetes-infra-fiap-fase3\.github\workflows\ci.yml',
-  'oficina-database-infra-fiap-fase3\docs\architecture.md',
-  'oficina-database-infra-fiap-fase3\docs\aws-academy.md',
-  'oficina-database-infra-fiap-fase3\docs\data-model.md',
-  'oficina-database-infra-fiap-fase3\.github\workflows\ci.yml'
+  'fiap-tech-challenge-fase3-oficina-backend\README.md',
+  'fiap-tech-challenge-fase3-oficina-backend\docs\README.md',
+  'fiap-tech-challenge-fase3-oficina-backend\docs\architecture\overview.md',
+  'fiap-tech-challenge-fase3-oficina-backend\docs\architecture\repository-boundaries.md',
+  'fiap-tech-challenge-fase3-oficina-backend\docs\architecture\authentication-flow.md',
+  'fiap-tech-challenge-fase3-oficina-backend\docs\architecture\observability-new-relic.md',
+  'fiap-tech-challenge-fase3-oficina-backend\docs\architecture\database-evolution.md',
+  'fiap-tech-challenge-fase3-oficina-backend\docs\contracts\authentication-api.yaml',
+  'fiap-tech-challenge-fase3-oficina-backend\docs\decisions\rfc\0001-aws-academy-and-environments.md',
+  'fiap-tech-challenge-fase3-oficina-backend\docs\decisions\rfc\0002-cpf-authentication.md',
+  'fiap-tech-challenge-fase3-oficina-backend\docs\decisions\adr\0001-four-repositories.md',
+  'fiap-tech-challenge-fase3-oficina-backend\docs\decisions\adr\0002-new-relic.md',
+  'fiap-tech-challenge-fase3-oficina-backend\docs\decisions\adr\0003-jwt-signing.md',
+  'fiap-tech-challenge-fase3-oficina-backend\docs\roadmap\phase3.md',
+  'fiap-tech-challenge-fase3-oficina-backend\docs\validation\week1.md',
+  'fiap-tech-challenge-fase3-oficina-auth-serverless\docs\architecture.md',
+  'fiap-tech-challenge-fase3-oficina-auth-serverless\docs\security.md',
+  'fiap-tech-challenge-fase3-oficina-auth-serverless\docs\deployment.md',
+  'fiap-tech-challenge-fase3-oficina-auth-serverless\.github\workflows\ci.yml',
+  'fiap-tech-challenge-fase3-oficina-kubernetes-infra\docs\architecture.md',
+  'fiap-tech-challenge-fase3-oficina-kubernetes-infra\docs\aws-academy.md',
+  'fiap-tech-challenge-fase3-oficina-kubernetes-infra\docs\new-relic.md',
+  'fiap-tech-challenge-fase3-oficina-kubernetes-infra\.github\workflows\ci.yml',
+  'fiap-tech-challenge-fase3-oficina-database-infra\docs\architecture.md',
+  'fiap-tech-challenge-fase3-oficina-database-infra\docs\aws-academy.md',
+  'fiap-tech-challenge-fase3-oficina-database-infra\docs\data-model.md',
+  'fiap-tech-challenge-fase3-oficina-database-infra\.github\workflows\ci.yml'
 )
 
 $missingFiles = $requiredFiles | Where-Object { -not (Test-Path $_) }
@@ -208,11 +208,11 @@ import yaml
 
 root = Path.cwd()
 files = [
-    root / 'oficina-backend-fiap-fase3/.github/workflows/ci.yml',
-    root / 'oficina-backend-fiap-fase3/docs/contracts/authentication-api.yaml',
-    root / 'oficina-auth-serverless-fiap-fase3/.github/workflows/ci.yml',
-    root / 'oficina-kubernetes-infra-fiap-fase3/.github/workflows/ci.yml',
-    root / 'oficina-database-infra-fiap-fase3/.github/workflows/ci.yml',
+    root / 'fiap-tech-challenge-fase3-oficina-backend/.github/workflows/ci.yml',
+    root / 'fiap-tech-challenge-fase3-oficina-backend/docs/contracts/authentication-api.yaml',
+    root / 'fiap-tech-challenge-fase3-oficina-auth-serverless/.github/workflows/ci.yml',
+    root / 'fiap-tech-challenge-fase3-oficina-kubernetes-infra/.github/workflows/ci.yml',
+    root / 'fiap-tech-challenge-fase3-oficina-database-infra/.github/workflows/ci.yml',
 ]
 
 for file in files:
@@ -220,7 +220,7 @@ for file in files:
         yaml.safe_load(stream)
 
 contract = yaml.safe_load(
-    (root / 'oficina-backend-fiap-fase3/docs/contracts/authentication-api.yaml')
+    (root / 'fiap-tech-challenge-fase3-oficina-backend/docs/contracts/authentication-api.yaml')
     .read_text(encoding='utf-8')
 )
 
@@ -253,15 +253,15 @@ from pathlib import Path
 import re
 
 root = Path.cwd()
-backend = root / 'oficina-backend-fiap-fase3'
+backend = root / 'fiap-tech-challenge-fase3-oficina-backend'
 files = [backend / 'README.md', backend / 'docs/README.md']
 for directory in ('architecture', 'decisions', 'roadmap', 'validation'):
     files.extend((backend / 'docs' / directory).rglob('*.md'))
 
 for name in (
-    'oficina-auth-serverless-fiap-fase3',
-    'oficina-kubernetes-infra-fiap-fase3',
-    'oficina-database-infra-fiap-fase3',
+    'fiap-tech-challenge-fase3-oficina-auth-serverless',
+    'fiap-tech-challenge-fase3-oficina-kubernetes-infra',
+    'fiap-tech-challenge-fase3-oficina-database-infra',
 ):
     files.extend((root / name).rglob('*.md'))
 
@@ -302,7 +302,7 @@ java -version
 A versão principal deve ser 21. Para executar a validação completa:
 
 ```powershell
-Set-Location C:\fiap-fase3\oficina-backend-fiap-fase3
+Set-Location C:\fiap-fase3\fiap-tech-challenge-fase3-oficina-backend
 .\mvnw.cmd -B verify
 ```
 
@@ -346,10 +346,10 @@ Na pasta `C:\fiap-fase3`, execute:
 
 ```powershell
 $repos = @(
-  'oficina-backend-fiap-fase3',
-  'oficina-auth-serverless-fiap-fase3',
-  'oficina-kubernetes-infra-fiap-fase3',
-  'oficina-database-infra-fiap-fase3'
+  'fiap-tech-challenge-fase3-oficina-backend',
+  'fiap-tech-challenge-fase3-oficina-auth-serverless',
+  'fiap-tech-challenge-fase3-oficina-kubernetes-infra',
+  'fiap-tech-challenge-fase3-oficina-database-infra'
 )
 
 foreach ($repo in $repos) {
@@ -394,7 +394,7 @@ Confirme também a existência das branches:
 A Semana 1 não altera o comportamento da aplicação. Se for necessário comprovar que a base da Fase 2 continua executando:
 
 ```powershell
-Set-Location C:\fiap-fase3\oficina-backend-fiap-fase3
+Set-Location C:\fiap-fase3\fiap-tech-challenge-fase3-oficina-backend
 docker compose up --build -d
 ```
 

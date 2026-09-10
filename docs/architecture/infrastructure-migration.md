@@ -6,9 +6,9 @@ A infraestrutura combinada da Fase 2 foi removida deste repositório. A Fase 3 m
 
 | Repositório | Recursos |
 |---|---|
-| `oficina-kubernetes-infra-fiap-fase3` | VPC, subnets, rotas, NAT Gateway, EKS e node group |
-| `oficina-database-infra-fiap-fase3` | DB subnet group, security group, parameter group e RDS PostgreSQL |
-| `oficina-backend-fiap-fase3` | imagem, Deployment, Service, HPA e configuração da aplicação |
+| `fiap-tech-challenge-fase3-oficina-kubernetes-infra` | VPC, subnets, rotas, NAT Gateway, EKS e node group |
+| `fiap-tech-challenge-fase3-oficina-database-infra` | DB subnet group, security group, parameter group e RDS PostgreSQL |
+| `fiap-tech-challenge-fase3-oficina-backend` | imagem, Deployment, Service, HPA e configuração da aplicação |
 
 O state combinado da Fase 2 não deve ser associado aos novos workspaces. Os ambientes da Fase 3 começam em states independentes.
 

@@ -2,7 +2,7 @@
 # Deploy da aplicacao no EKS do AWS Academy usando o RDS (banco gerenciado).
 #
 # Na Fase 3, o banco gerenciado pertence ao repositorio
-# oficina-database-infra-fiap-fase3. A aplicacao usa o RDS provisionado por ele.
+# fiap-tech-challenge-fase3-oficina-database-infra. A aplicacao usa o RDS provisionado por ele.
 #
 # Este script descobre o endpoint do RDS e cria namespace, ConfigMap, Secret,
 # Deployment, Service e HPA somente para a aplicacao.
@@ -23,7 +23,7 @@
 set -euo pipefail
 
 REGION="${REGION:-us-west-2}"
-IMAGE="${IMAGE:-ghcr.io/tiagomiele/oficina-backend-fiap-fase3:latest}"
+IMAGE="${IMAGE:-ghcr.io/tiagomiele/fiap-tech-challenge-fase3-oficina-backend:latest}"
 DB_INSTANCE_ID="${DB_INSTANCE_ID:-oficina-homolog-db}"
 DB_NAME="${DB_NAME:-oficina}"
 DB_USER="${DB_USER:-oficina_admin}"

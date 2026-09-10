@@ -238,7 +238,7 @@ jobs:
           client-id: ${{ vars.SYNC_APP_CLIENT_ID }}
           private-key: ${{ secrets.SYNC_APP_PRIVATE_KEY }}
           owner: ${{ github.repository_owner }}
-          repositories: oficina-backend-fiap-fase3,oficina-kubernetes-infra-fiap-fase3
+          repositories: fiap-tech-challenge-fase3-oficina-backend,fiap-tech-challenge-fase3-oficina-kubernetes-infra
 
       - name: Synchronize Backend URL with Auth and New Relic
         if: env.DEPLOY_ENABLED == 'true'

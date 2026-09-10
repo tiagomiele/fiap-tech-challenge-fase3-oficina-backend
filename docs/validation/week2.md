@@ -6,9 +6,9 @@ Este guia valida a implementação da Semana 2 sem provisionar recursos e sem ex
 
 | Entrega | Pull Request |
 |---|---|
-| VPC, rede, EKS e managed node group | [Kubernetes infra #2](https://github.com/tiagomiele/oficina-kubernetes-infra-fiap-fase3/pull/2) |
-| RDS PostgreSQL e segurança do banco | [Database infra #2](https://github.com/tiagomiele/oficina-database-infra-fiap-fase3/pull/2) |
-| Remoção da infraestrutura legada da aplicação | [Backend #4](https://github.com/tiagomiele/oficina-backend-fiap-fase3/pull/4) |
+| VPC, rede, EKS e managed node group | [Kubernetes infra #2](https://github.com/tiagomiele/fiap-tech-challenge-fase3-oficina-kubernetes-infra/pull/2) |
+| RDS PostgreSQL e segurança do banco | [Database infra #2](https://github.com/tiagomiele/fiap-tech-challenge-fase3-oficina-database-infra/pull/2) |
+| Remoção da infraestrutura legada da aplicação | [Backend #4](https://github.com/tiagomiele/fiap-tech-challenge-fase3-oficina-backend/pull/4) |
 
 A validação está dividida em três níveis:
 
@@ -41,9 +41,9 @@ Se os PRs ainda estiverem abertos, valide diretamente a branch deles:
 $root = 'C:\fiap-fase3'
 $branch = 'devin/1786111008-week2-infrastructure'
 $repositories = @(
-  'oficina-backend-fiap-fase3',
-  'oficina-kubernetes-infra-fiap-fase3',
-  'oficina-database-infra-fiap-fase3'
+  'fiap-tech-challenge-fase3-oficina-backend',
+  'fiap-tech-challenge-fase3-oficina-kubernetes-infra',
+  'fiap-tech-challenge-fase3-oficina-database-infra'
 )
 
 foreach ($repository in $repositories) {
@@ -71,7 +71,7 @@ O modo detached é usado apenas para leitura e validação; ele não publica alt
 ## 3. Validar o Terraform do Kubernetes
 
 ```powershell
-Set-Location C:\fiap-fase3\oficina-kubernetes-infra-fiap-fase3
+Set-Location C:\fiap-fase3\fiap-tech-challenge-fase3-oficina-kubernetes-infra
 terraform fmt -check -recursive
 if ($LASTEXITCODE -ne 0) { throw 'terraform fmt falhou no Kubernetes' }
 
@@ -143,7 +143,7 @@ A implementação deve conter:
 ## 4. Validar o Terraform do banco
 
 ```powershell
-Set-Location C:\fiap-fase3\oficina-database-infra-fiap-fase3
+Set-Location C:\fiap-fase3\fiap-tech-challenge-fase3-oficina-database-infra
 terraform fmt -check -recursive
 if ($LASTEXITCODE -ne 0) { throw 'terraform fmt falhou no banco' }
 
@@ -199,7 +199,7 @@ Revise `main.tf` e confirme:
 ## 5. Validar a separação da aplicação
 
 ```powershell
-Set-Location C:\fiap-fase3\oficina-backend-fiap-fase3
+Set-Location C:\fiap-fase3\fiap-tech-challenge-fase3-oficina-backend
 
 $legacyPaths = @(
   'infra',
@@ -250,8 +250,8 @@ Execute nos dois repositórios Terraform:
 
 ```powershell
 $terraformRepositories = @(
-  'C:\fiap-fase3\oficina-kubernetes-infra-fiap-fase3',
-  'C:\fiap-fase3\oficina-database-infra-fiap-fase3'
+  'C:\fiap-fase3\fiap-tech-challenge-fase3-oficina-kubernetes-infra',
+  'C:\fiap-fase3\fiap-tech-challenge-fase3-oficina-database-infra'
 )
 
 foreach ($repository in $terraformRepositories) {
@@ -271,9 +271,9 @@ Write-Host 'Nenhum terraform apply encontrado nos workflows.'
 
 Abra:
 
-- https://github.com/tiagomiele/oficina-kubernetes-infra-fiap-fase3/pull/2
-- https://github.com/tiagomiele/oficina-database-infra-fiap-fase3/pull/2
-- https://github.com/tiagomiele/oficina-backend-fiap-fase3/pull/4
+- https://github.com/tiagomiele/fiap-tech-challenge-fase3-oficina-kubernetes-infra/pull/2
+- https://github.com/tiagomiele/fiap-tech-challenge-fase3-oficina-database-infra/pull/2
+- https://github.com/tiagomiele/fiap-tech-challenge-fase3-oficina-backend/pull/4
 
 Resultados esperados:
 
@@ -428,7 +428,7 @@ environment: homolog
 ### Opção B — Terraform CLI para o primeiro bootstrap
 
 ```powershell
-Set-Location C:\fiap-fase3\oficina-kubernetes-infra-fiap-fase3
+Set-Location C:\fiap-fase3\fiap-tech-challenge-fase3-oficina-kubernetes-infra
 terraform login app.terraform.io
 
 $env:TF_CLOUD_ORGANIZATION = '<organizacao-hcp>'
@@ -497,9 +497,9 @@ Após validar uma branch de PR em modo detached:
 ```powershell
 $root = 'C:\fiap-fase3'
 $repositories = @(
-  'oficina-backend-fiap-fase3',
-  'oficina-kubernetes-infra-fiap-fase3',
-  'oficina-database-infra-fiap-fase3'
+  'fiap-tech-challenge-fase3-oficina-backend',
+  'fiap-tech-challenge-fase3-oficina-kubernetes-infra',
+  'fiap-tech-challenge-fase3-oficina-database-infra'
 )
 
 foreach ($repository in $repositories) {

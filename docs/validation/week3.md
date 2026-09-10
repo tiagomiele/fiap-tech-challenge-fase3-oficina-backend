@@ -55,10 +55,10 @@ Se `openssl` não for reconhecido, instale o OpenSSL antes de gerar as chaves. N
 Confirme que os repositórios estão nestes diretórios ou adapte todos os caminhos deste guia:
 
 ```text
-C:\fiap-fase3\oficina-kubernetes-infra-fiap-fase3
-C:\fiap-fase3\oficina-database-infra-fiap-fase3
-C:\fiap-fase3\oficina-backend-fiap-fase3
-C:\fiap-fase3\oficina-auth-serverless-fiap-fase3
+C:\fiap-fase3\fiap-tech-challenge-fase3-oficina-kubernetes-infra
+C:\fiap-fase3\fiap-tech-challenge-fase3-oficina-database-infra
+C:\fiap-fase3\fiap-tech-challenge-fase3-oficina-backend
+C:\fiap-fase3\fiap-tech-challenge-fase3-oficina-auth-serverless
 ```
 
 ---
@@ -70,7 +70,7 @@ Execute os comandos em cada repositório. Não use uma branch `devin/*` para a v
 ### 2.1 Kubernetes
 
 ```powershell
-Set-Location C:\fiap-fase3\oficina-kubernetes-infra-fiap-fase3
+Set-Location C:\fiap-fase3\fiap-tech-challenge-fase3-oficina-kubernetes-infra
 git switch homolog
 git pull --ff-only
 git status --short
@@ -79,7 +79,7 @@ git status --short
 ### 2.2 Banco
 
 ```powershell
-Set-Location C:\fiap-fase3\oficina-database-infra-fiap-fase3
+Set-Location C:\fiap-fase3\fiap-tech-challenge-fase3-oficina-database-infra
 git switch homolog
 git pull --ff-only
 git status --short
@@ -88,7 +88,7 @@ git status --short
 ### 2.3 Backend
 
 ```powershell
-Set-Location C:\fiap-fase3\oficina-backend-fiap-fase3
+Set-Location C:\fiap-fase3\fiap-tech-challenge-fase3-oficina-backend
 git switch homolog
 git pull --ff-only
 git status --short
@@ -97,7 +97,7 @@ git status --short
 ### 2.4 Autenticação
 
 ```powershell
-Set-Location C:\fiap-fase3\oficina-auth-serverless-fiap-fase3
+Set-Location C:\fiap-fase3\fiap-tech-challenge-fase3-oficina-auth-serverless
 git switch homolog
 git pull --ff-only
 git status --short
@@ -203,7 +203,7 @@ O campo `Account` deve mostrar a conta atual do Learner Lab. Um ARN contendo `as
 Variáveis como `$vpcId`, `$dbHost` e `$backendUrl` existem somente na janela atual do PowerShell. Se fechar a janela, recupere os valores depois que os recursos estiverem aplicados:
 
 ```powershell
-Set-Location C:\fiap-fase3\oficina-kubernetes-infra-fiap-fase3
+Set-Location C:\fiap-fase3\fiap-tech-challenge-fase3-oficina-kubernetes-infra
 $env:TF_CLOUD_ORGANIZATION = 'oficina-fiap-soat-fase-2'
 $env:TF_WORKSPACE = 'oficina-kubernetes-homolog'
 terraform init -input=false -lockfile=readonly
@@ -212,7 +212,7 @@ $eksClusterName = terraform output -raw eks_cluster_name
 $eksSecurityGroupId = terraform output -raw eks_cluster_security_group_id
 $privateSubnetsJson = terraform output -json private_subnet_ids
 
-Set-Location C:\fiap-fase3\oficina-database-infra-fiap-fase3
+Set-Location C:\fiap-fase3\fiap-tech-challenge-fase3-oficina-database-infra
 $env:TF_WORKSPACE = 'oficina-database-homolog'
 terraform init -input=false -lockfile=readonly
 $dbHost = terraform output -raw database_endpoint
@@ -266,7 +266,7 @@ Este guia usa somente os workspaces de homologação. Não configure nem aplique
 ### 5.1 Confirmar o código
 
 ```powershell
-Set-Location C:\fiap-fase3\oficina-kubernetes-infra-fiap-fase3
+Set-Location C:\fiap-fase3\fiap-tech-challenge-fase3-oficina-kubernetes-infra
 Select-String -Path .\variables.tf -Pattern 'default\s+=\s+"1.34"'
 Select-String -Path .\environments\homolog.tfvars.example -Pattern 'cluster_version\s+=\s+"1.34"'
 terraform fmt -check -recursive
@@ -292,7 +292,7 @@ Antes do plan, renove as três **Environment variables** conforme a seção 3.2.
 ### 5.3 Executar o plan
 
 ```powershell
-Set-Location C:\fiap-fase3\oficina-kubernetes-infra-fiap-fase3
+Set-Location C:\fiap-fase3\fiap-tech-challenge-fase3-oficina-kubernetes-infra
 $env:TF_CLOUD_ORGANIZATION = 'oficina-fiap-soat-fase-2'
 $env:TF_WORKSPACE = 'oficina-kubernetes-homolog'
 terraform init -input=false -lockfile=readonly
@@ -421,7 +421,7 @@ Guarde a senha do banco em um gerenciador de senhas. A mesma senha será configu
 ### 6.2 Executar o plan do banco
 
 ```powershell
-Set-Location C:\fiap-fase3\oficina-database-infra-fiap-fase3
+Set-Location C:\fiap-fase3\fiap-tech-challenge-fase3-oficina-database-infra
 $env:TF_CLOUD_ORGANIZATION = 'oficina-fiap-soat-fase-2'
 $env:TF_WORKSPACE = 'oficina-database-homolog'
 terraform init -input=false -lockfile=readonly
@@ -508,7 +508,7 @@ Regras:
 ## 8. Validar o backend localmente
 
 ```powershell
-Set-Location C:\fiap-fase3\oficina-backend-fiap-fase3
+Set-Location C:\fiap-fase3\fiap-tech-challenge-fase3-oficina-backend
 .\mvnw.cmd -B -Dtest=ServerlessJwtVerifierTest,ArchitectureTest test
 .\mvnw.cmd -B -Dtest=FluxoCompletoOsIntegrationTest test
 .\mvnw.cmd -B -DskipTests package
@@ -528,7 +528,7 @@ Esses testes verificam JWT administrativo HMAC, JWT de cliente RSA, propriedade 
 ## 9. Validar e empacotar a autenticação localmente
 
 ```powershell
-Set-Location C:\fiap-fase3\oficina-auth-serverless-fiap-fase3
+Set-Location C:\fiap-fase3\fiap-tech-challenge-fase3-oficina-auth-serverless
 .\mvnw.cmd -B clean verify spotless:check
 Test-Path .\target\oficina-auth.jar
 ```
@@ -603,7 +603,7 @@ Se houver duplicidade ou status desconhecido, pare. Corrija os dados de forma co
 
 Abra:
 
-1. repositório `oficina-backend-fiap-fase3` no GitHub;
+1. repositório `fiap-tech-challenge-fase3-oficina-backend` no GitHub;
 2. **Settings → Environments**;
 3. abra ou crie o environment `homolog`.
 
@@ -665,14 +665,14 @@ As credenciais AWS do GitHub também expiram. Renove os três secrets sempre que
 A pipeline publica a imagem em:
 
 ```text
-ghcr.io/tiagomiele/oficina-backend-fiap-fase3
+ghcr.io/tiagomiele/fiap-tech-challenge-fase3-oficina-backend
 ```
 
 O Deployment não configura credenciais de pull. Portanto, confirme que o pacote GHCR pode ser lido pelo cluster:
 
 1. abra o perfil/organização no GitHub;
 2. abra **Packages**;
-3. selecione o pacote `oficina-backend-fiap-fase3`;
+3. selecione o pacote `fiap-tech-challenge-fase3-oficina-backend`;
 4. abra **Package settings**;
 5. confirme que a visibilidade permite pull sem autenticação pelo EKS;
 6. para este projeto acadêmico, use visibilidade pública se não houver conteúdo proprietário na imagem.
@@ -961,7 +961,7 @@ Não coloque aspas adicionais ao redor do conteúdo PEM no formulário do HCP.
 ### 17.1 Recriar o JAR
 
 ```powershell
-Set-Location C:\fiap-fase3\oficina-auth-serverless-fiap-fase3
+Set-Location C:\fiap-fase3\fiap-tech-challenge-fase3-oficina-auth-serverless
 .\mvnw.cmd -B -DskipTests package
 Test-Path .\target\oficina-auth.jar
 ```
