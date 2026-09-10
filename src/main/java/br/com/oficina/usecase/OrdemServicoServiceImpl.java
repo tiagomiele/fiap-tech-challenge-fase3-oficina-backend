@@ -24,6 +24,7 @@ import br.com.oficina.usecase.gateway.VeiculoRepository;
 import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import java.util.Objects;
 
 @Service
 public class OrdemServicoServiceImpl {
@@ -288,7 +289,7 @@ public class OrdemServicoServiceImpl {
   }
 
   private void exigirProprietario(OrdemServico os, Long idCliente) {
-    if (idCliente == null || !os.getIdCliente().equals(idCliente)) {
+    if (idCliente == null || !Objects.equals(os.getIdCliente(), idCliente)) {
       throw new BusinessException("OS_NAO_ENCONTRADA", "Ordem de serviço não encontrada");
     }
   }
