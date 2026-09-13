@@ -1,135 +1,122 @@
-# Oficina Backend — Tech Challenge Fase 3
+# Oficina Fase 3 — documentação central
 
-[![CI](https://github.com/tiagomiele/fiap-tech-challenge-fase3-oficina-backend/actions/workflows/ci.yml/badge.svg)](https://github.com/tiagomiele/fiap-tech-challenge-fase3-oficina-backend/actions/workflows/ci.yml)
+Este repositório é o ponto de entrada funcional, técnico e acadêmico da Oficina Fase 3. Ele permite compreender o negócio, a arquitetura, as decisões, o CI/CD, o bootstrap e as evidências, sem substituir ou alterar os quatro projetos originais.
 
-API principal do sistema de gestão de oficina mecânica. A Fase 3 evolui a base da Fase 2 para autenticação serverless por CPF, API Gateway, infraestrutura dividida em repositórios independentes e observabilidade com New Relic.
+## Visão de negócio
 
-## Responsabilidades
+A Oficina organiza o ciclo completo de atendimento de uma oficina mecânica: cadastro do cliente e do veículo, recepção, diagnóstico, orçamento, aprovação, execução do reparo, consumo de peças, pagamento e entrega. Também apoia estoque, compras de fornecedores, movimentações financeiras, notificações e relatórios operacionais.
 
-Este repositório contém somente a aplicação Spring Boot e os artefatos necessários para executá-la em Kubernetes:
+O sistema atende clientes, funcionários, técnicos e gestores. A **Ordem de Serviço (OS)** é o agregado central e mantém o histórico da jornada:
 
-- regras de negócio e fluxo das Ordens de Serviço;
-- APIs administrativas, técnicas e de cliente;
-- persistência e migrações Flyway;
-- validação dos JWTs emitidos pelo serviço serverless;
-- métricas, logs estruturados e instrumentação APM;
-- publicação de notificações pelo contrato serverless;
-- imagem Docker e deploy da aplicação no EKS com HPA, distribuição de pods e PDB.
-
-A infraestrutura AWS, o banco gerenciado e a autenticação serverless pertencem a repositórios separados. O Terraform combinado da Fase 2 foi removido deste repositório e substituído por states e pipelines independentes.
-
-## Arquitetura da solução
-
-```mermaid
-flowchart LR
-    Client[Cliente ou operador] --> APIGW[API Gateway]
-    APIGW --> Auth[Lambda de autenticação por CPF]
-    Auth --> RDS[(RDS PostgreSQL)]
-    APIGW --> App[Aplicação Spring Boot no EKS]
-    App --> RDS
-    App --> Notify[Lambda + SNS + SES]
-    App --> NR[New Relic]
-    Auth --> NR
-    EKS[EKS e HPA] --> NR
+```text
+Recebida → Em diagnóstico → Aguardando aprovação → Em execução
+→ Aguardando pagamento → Paga → Entregue
 ```
 
-### Repositórios
+Rejeições e cancelamentos seguem regras próprias. O histórico permite acompanhar o atendimento e calcular indicadores como volume de OS e tempos médios por etapa.
 
-| Repositório | Responsabilidade |
-|---|---|
-| [fiap-tech-challenge-fase3-oficina-backend](https://github.com/tiagomiele/fiap-tech-challenge-fase3-oficina-backend) | Aplicação principal no Kubernetes |
-| [fiap-tech-challenge-fase3-oficina-auth-serverless](https://github.com/tiagomiele/fiap-tech-challenge-fase3-oficina-auth-serverless) | Lambda, autenticação por CPF, JWT e API Gateway |
-| [fiap-tech-challenge-fase3-oficina-kubernetes-infra](https://github.com/tiagomiele/fiap-tech-challenge-fase3-oficina-kubernetes-infra) | VPC, EKS, HPA e integração Kubernetes/New Relic |
-| [fiap-tech-challenge-fase3-oficina-database-infra](https://github.com/tiagomiele/fiap-tech-challenge-fase3-oficina-database-infra) | RDS PostgreSQL e infraestrutura de dados |
+## Evolução para a Fase 3
+
+A Fase 2 consolidou as regras de negócio em um Backend Java com Clean Architecture, banco relacional, testes, Docker, Kubernetes, Terraform e CI/CD. A Fase 3 preserva essas funcionalidades e responde ao cenário de crescimento da base de clientes e expansão para múltiplas unidades, acrescentando segurança, escalabilidade, alta disponibilidade e observabilidade corporativa.
+
+A entrada utiliza o **Amazon API Gateway**. Uma **Function Serverless** valida o CPF, consulta a existência e o status do cliente no PostgreSQL e emite um **JWT RSA de curta duração**. O Lambda Authorizer protege as APIs do cliente antes de encaminhar a chamada ao Backend no EKS.
+
+A evolução também separa aplicação, autenticação, banco e Kubernetes em quatro projetos com pipelines independentes, ambientes de homologação e produção e telemetria centralizada no New Relic.
+
+- [Visão detalhada de negócio, evolução e engenharia](docs/visao-negocio-e-engenharia.md)
+
+## Aplicações da solução
+
+| Componente | Contribuição para o negócio | Responsabilidade técnica | Documentação |
+|---|---|---|---|
+| Backend | Executa o atendimento e as regras da oficina. | APIs, domínio, migrations, Docker e deploy no EKS. | Este repositório · [Projeto original](https://github.com/tiagomiele/fiap-tech-challenge-fase3-oficina-backend) |
+| Auth | Permite acesso seguro do cliente e notificações desacopladas. | CPF, JWT, API Gateway, Authorizer, SNS e DLQ. | [Auth](https://github.com/tiagomiele/auth) · [Projeto original](https://github.com/tiagomiele/fiap-tech-challenge-fase3-oficina-auth-serverless) |
+| Database | Preserva os dados operacionais com consistência e recuperação. | RDS privado, backup, segurança, logs e telemetria. | [Database](https://github.com/tiagomiele/database) · [Projeto original](https://github.com/tiagomiele/fiap-tech-challenge-fase3-oficina-database-infra) |
+| Kubernetes | Mantém a aplicação disponível, escalável e observável. | VPC, EKS, nodes, add-ons, HPA e New Relic. | [Kubernetes](https://github.com/tiagomiele/kubernetes) · [Projeto original](https://github.com/tiagomiele/fiap-tech-challenge-fase3-oficina-kubernetes-infra) |
+
+## Modelo arquitetural e práticas
+
+A solução distribui responsabilidades entre quatro repositórios, mas mantém o domínio principal em um **monólito modular**. O Backend aplica **DDD e Clean Architecture em quatro anéis** (`Domain`, `Usecase`, `Adapter` e `Infrastructure`), com dependências apontando para o domínio e limites verificados por ArchUnit.
+
+O Auth utiliza camadas leves de domínio, aplicação, handlers e infraestrutura, adequadas às Lambdas. Database e Kubernetes adotam **Infrastructure as Code declarativa**, com Terraform, states separados e plans revisáveis. Clean Code, SOLID, testes automatizados, formatação, análise de segurança, revisão por Pull Request e observabilidade são práticas transversais.
+
+> Clean Code e SOLID são princípios de desenvolvimento; o modelo estrutural comprovado do Backend é Clean Architecture. Os projetos de infraestrutura não simulam camadas de aplicação: seguem organização própria de IaC.
+
+## Arquitetura específica do Backend
+
+![Arquitetura integrada da Oficina Fase 3 com ícones dos serviços AWS](docs/assets/arquitetura-integrada-oficina-fase3.png)
+
+O Backend concentra o domínio da oficina. API Gateway, autenticação, banco e plataforma Kubernetes permanecem desacoplados em projetos independentes.
+
+- [Diagrama completo de componentes](docs/architecture/componentes.md)
+- [Sequência de autenticação por CPF](docs/architecture/autenticacao.md)
+- [Sequência de abertura da ordem de serviço](docs/architecture/abertura-ordem-servico.md)
 
 ## Tecnologias
 
-- Java 21 e Spring Boot 3.3;
-- PostgreSQL 16, JPA/Hibernate e Flyway;
-- Spring Security e JWT;
-- JUnit 5, RestAssured, ArchUnit e JaCoCo;
-- Docker, Kubernetes, HPA, topology spread e PodDisruptionBudget;
-- GitHub Actions e GHCR;
-- New Relic APM e logs estruturados.
+| Área | Tecnologias e finalidade |
+|---|---|
+| Arquitetura | DDD, Clean Architecture, monólito modular, serverless e Infrastructure as Code |
+| Aplicação | Java 21, Spring Boot 3.3, Spring Security, JPA/Hibernate e Flyway |
+| APIs e segurança | API Gateway v2, AWS Lambda, Lambda Authorizer e JWT RSA |
+| Dados | Amazon RDS PostgreSQL 16, constraints, índices, migrations, backup e SSL |
+| Plataforma | Amazon EKS, Kubernetes, Helm, HPA, PDB, Metrics Server e Load Balancer |
+| Entrega | GitHub Actions, Docker, GHCR, Terraform, HCP Terraform e GitHub Environments |
+| Qualidade | JUnit 5, Mockito, RestAssured, Testcontainers, ArchUnit, JaCoCo, Newman e k6 |
+| Segurança de código e IaC | SBOM CycloneDX, Trivy, Checkov, TFLint, actionlint, ShellCheck e Gitleaks |
+| Observabilidade | New Relic APM, logs JSON, correlação, traces, dashboards, alertas e sintéticos |
 
-## Executar localmente
+## Execução e deploy
 
-### Pré-requisitos
+A implantação completa deve respeitar a dependência entre os projetos:
 
-- Docker Desktop com Docker Compose;
-- ou Java 21 e PostgreSQL 16.
-
-### Docker Compose
-
-```bash
-docker compose up --build
+```text
+Kubernetes → Database → Auth → Backend
+→ reaplicar Auth → reaplicar observabilidade → executar E2E
 ```
 
-Serviços locais:
+- [Ciclos CI/CD de homologação e produção](docs/cicd-promocao.md)
+- [Bootstrap: subir a Oficina Fase 3 na AWS do zero](docs/bootstrap-aws-do-zero.md)
+- [Instruções locais do Backend](https://github.com/tiagomiele/fiap-tech-challenge-fase3-oficina-backend#executar-localmente)
 
-- API: `http://localhost:8080`
-- Swagger: `http://localhost:8080/swagger-ui/index.html`
-- Healthcheck: `http://localhost:8080/actuator/health`
-- Adminer: `http://localhost:8081`
+Toda alteração nos projetos originais deve passar por Pull Request. O CI valida a mudança; o Terraform Plan antecipa o impacto; o merge dispara o deploy do ambiente correspondente. Produção utiliza configuração e aprovação próprias.
 
-### Obter tokens pelo Swagger
+## Swagger, OpenAPI e Postman
 
-O Swagger reúne os fluxos de autenticação da plataforma:
+- [Swagger e execução local do Backend](https://github.com/tiagomiele/fiap-tech-challenge-fase3-oficina-backend#executar-localmente)
+- [Collection Postman da validação integrada](https://github.com/tiagomiele/fiap-tech-challenge-fase3-oficina-backend/blob/main/tests/postman/oficina-weeks4-5.postman_collection.json)
+- [Contrato OpenAPI da autenticação](https://github.com/tiagomiele/fiap-tech-challenge-fase3-oficina-auth-serverless/blob/main/docs/openapi/oficina-auth.yaml)
 
-- `POST /auth/cpf`: cliente autenticado no Auth Serverless pelo API Gateway;
-- `POST /auth/login`: funcionário ou técnico autenticado no Backend por e-mail e senha;
-- `POST /usuarios`: funcionário autenticado cadastra novos funcionários ou técnicos.
+As URLs implantadas no AWS Academy são temporárias. Os links de Swagger e API Gateway ativos devem ser atualizados após cada reconstrução do ambiente.
 
-O perfil é determinado pelo cadastro, nunca pelo request de login. Configure `AUTH_BASE_URL` com a URL base do API Gateway para habilitar o `Try it out` de `/auth/cpf`; homologação e produção recebem esse valor automaticamente pelo GitHub Environment.
+## Evidências
 
-### Validar o projeto
+- [Índice de APIs, testes, deploys e E2E](docs/evidencias.md)
+- [Requisitos de observabilidade e locais para anexar evidências](docs/observabilidade-evidencias.md)
+- [Matriz de requisitos acadêmicos](docs/matriz-requisitos.md)
 
-```bash
-./mvnw spotless:check
-./mvnw verify
-```
+## Decisões arquiteturais
 
-O `verify` executa testes unitários, testes de integração, ArchUnit e o gate de cobertura JaCoCo do domínio.
+### RFCs
 
-No GitHub Actions, o CI apresenta quatro jobs sequenciais: `Repository validation → Build, test & coverage → SBOM → Security scan`. O CD permanece linear: validação da aplicação → build/publicação da imagem → deploy → smoke test → captura e sincronização do LoadBalancer. Pull Requests não executam deploy.
+- [AWS e estratégia de ambientes](docs/decisions/rfc/0001-aws-e-ambientes.md)
+- [PostgreSQL gerenciado no RDS](docs/decisions/rfc/0002-postgresql-rds.md)
+- [Autenticação por CPF e JWT](docs/decisions/rfc/0003-autenticacao-cpf-jwt.md)
+- [Observabilidade com New Relic](docs/decisions/rfc/0004-observabilidade-new-relic.md)
 
-## Preparar homologação ou produção
+### ADRs
 
-Com os quatro repositórios clonados como diretórios irmãos, copie o bloco `[default]` do AWS Academy e execute:
+- [Repositórios independentes](docs/decisions/adr/0001-repositorios-independentes.md)
+- [Comunicação assíncrona](docs/decisions/adr/0002-comunicacao-assincrona.md)
+- [Alta disponibilidade e HPA](docs/decisions/adr/0003-alta-disponibilidade-hpa.md)
+- [Logs estruturados e correlação](docs/decisions/adr/0004-logs-correlacao-traces.md)
 
-```powershell
-.\scripts\configure-environment.ps1 -Environment homolog
-# ou
-.\scripts\configure-environment.ps1 -Environment production
-```
+## Entrega acadêmica final
 
-O script cria/configura o projeto e os oito workspaces HCP, renova AWS CLI, Variable Set e GitHub Environments, preserva secrets fora do Git e prepara as credenciais consumidas pelos workflows. Kubernetes, Database, Auth e Backend sincronizam seus próprios outputs automaticamente após cada deploy. No AWS Academy, omita `-EnableSesDelivery` e `-CreateSesIdentity`: a notificação permanece assíncrona, usa log técnico sem PII e não solicita nem persiste e-mail remetente. Em uma conta com identidade SES verificada, use `-EnableSesDelivery` e informe o remetente; acrescente `-CreateSesIdentity` somente se a role puder solicitar a verificação. A chave técnica é gerada e reutilizada automaticamente. Após o apply do RDS, use `-RequireBackendDeployReady` para exigir os outputs do EKS/RDS e confirmar `DEPLOY_ENABLED=true` antes do CD. Produção recebe por padrão RDS Multi-AZ, proteção contra exclusão e snapshot final; `-UseAwsAcademyDisposableProductionProfile` é um override explícito, sem HA, somente para demonstração descartável. O script não executa apply ou deploy. Consulte o [guia geral](docs/validation/general-project.md).
+O PDF enviado ao portal deve centralizar:
 
-## Documentação
-
-- [Índice da documentação](docs/README.md)
-- [Arquitetura geral](docs/architecture/overview.md)
-- [Limites dos repositórios](docs/architecture/repository-boundaries.md)
-- [Fluxo de autenticação por CPF](docs/architecture/authentication-flow.md)
-- [Sequência de abertura da Ordem de Serviço](docs/architecture/service-order-opening-flow.md)
-- [Observabilidade com New Relic](docs/architecture/observability-new-relic.md)
-- [Evolução do banco de dados](docs/architecture/database-evolution.md)
-- [Migração da infraestrutura da Fase 2](docs/architecture/infrastructure-migration.md)
-- [Contrato da API de autenticação](docs/contracts/authentication-api.yaml)
-- [Guia geral de execução e validação do projeto](docs/validation/general-project.md)
-- [Histórico de validação da Semana 1](docs/validation/week1.md)
-- [Histórico de validação da Semana 2](docs/validation/week2.md)
-- [Histórico de validação da Semana 3](docs/validation/week3.md)
-- [Roadmap da Fase 3](docs/roadmap/phase3.md)
-- [Documentação preservada da Fase 2](docs/fase2/README-fase2.md)
-
-## Segurança e configuração
-
-Segredos não devem ser versionados. Banco, JWT, New Relic, chave técnica da notificação e SMTP de contingência são configurados por variáveis de ambiente e GitHub Environments. O modo integrado usa `NOTIFICATION_ENDPOINT`, `NOTIFICATION_API_KEY` e `NOTIFICACAO_TIPO=serverless`. Consulte os documentos específicos antes de executar deploy.
-
-## Contribuição
-
-- não são permitidos commits diretos na `main`;
-- toda mudança deve passar por Pull Request;
-- o CI deve estar aprovado antes do merge;
-- mudanças arquiteturais devem atualizar RFCs ou ADRs.
+1. links dos quatro projetos originais;
+2. links das documentações;
+3. vídeo de até 15 minutos no YouTube ou Vimeo;
+4. evidências de CI/CD, APIs, E2E e New Relic;
+5. confirmação de que `soat-architecture` foi adicionado aos quatro projetos.

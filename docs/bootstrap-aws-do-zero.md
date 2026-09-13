@@ -33,11 +33,11 @@ Portanto, não execute um workflow manual de plan antes de cada deploy e não re
 2. Execute somente um workflow por vez e aguarde-o terminar verde.
 3. Não selecione `main` ou `production` durante a homologação.
 4. Não envie no chat, prints ou documentos:
-  - credenciais do AWS Academy;
-  - tokens HCP Terraform;
-  - chaves New Relic;
-  - conteúdo do arquivo `.pem` da GitHub App;
-  - senhas, JWTs ou chaves RSA.
+- credenciais do AWS Academy;
+- tokens HCP Terraform;
+- chaves New Relic;
+- conteúdo do arquivo `.pem` da GitHub App;
+- senhas, JWTs ou chaves RSA.
 5. Não versione `C:\fiap-secrets`, arquivos `.pem`, `.env`, credenciais ou states Terraform.
 6. Não ative Auto Apply nos workspaces HCP Terraform.
 7. Se um plan interno mostrar destruição inesperada, interrompa o run antes de continuar para o próximo projeto.
