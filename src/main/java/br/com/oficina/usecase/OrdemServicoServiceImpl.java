@@ -22,9 +22,9 @@ import br.com.oficina.usecase.gateway.PecaRepository;
 import br.com.oficina.usecase.gateway.ServicoRepository;
 import br.com.oficina.usecase.gateway.VeiculoRepository;
 import java.util.List;
+import java.util.Objects;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import java.util.Objects;
 
 @Service
 public class OrdemServicoServiceImpl {
