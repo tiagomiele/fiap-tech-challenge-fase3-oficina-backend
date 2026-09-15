@@ -21,29 +21,14 @@ Comprovar que a solução permite acompanhar disponibilidade, desempenho e falha
 
 Preencher somente depois de reconstruir e validar o ambiente:
 
-- **Dashboard geral de homologação:** inserir link.
-- **Dashboard geral de produção:** inserir link.
-- **Volume diário de ordens de serviço:** inserir link ou imagem.
-- **Tempos médios por etapa:** inserir link ou imagem.
-- **Falhas de ordens e integrações:** inserir link ou imagem.
-- **CPU e memória do Kubernetes:** inserir link ou imagem.
-- **Healthcheck e disponibilidade:** inserir link ou imagem.
-- **Logs estruturados correlacionados:** inserir link ou imagem.
-- **Trace distribuído:** inserir link ou imagem.
-
-## Critério de validação
-
-1. Execute um fluxo autenticado completo.
-2. Preserve o `correlationId` ou `traceId` retornado ou registrado.
-3. Localize a requisição no APM e nos logs.
-4. Confirme o trajeto entre API Gateway, Lambda e Backend.
-5. Confira métricas do pod durante a execução.
-6. Valide a atualização dos widgets de ordens e falhas.
-7. Registre links ou imagens para o PDF e o vídeo.
-
-## Segurança das evidências
-
-Não publique CPF completo, JWT, senhas, chaves, tokens, conexão JDBC ou conteúdo de secrets. Logs e screenshots devem mascarar dados pessoais e credenciais.
+- [New Relic — consumo de CPU](docs-fase3/evidencias/07-Monitoramento/NR-CPU.png)
+- [New Relic — disponibilidade da aplicação](docs-fase3/evidencias/07-Monitoramento/NR-Disponibilidade.png)
+- [New Relic — falhas nas ordens de serviço](docs-fase3/evidencias/07-Monitoramento/NR-Falhas-OS.png)
+- [New Relic — latência das APIs](docs-fase3/evidencias/07-Monitoramento/NR-latencia.png)
+- [New Relic — logs da aplicação](docs-fase3/evidencias/07-Monitoramento/NR-Logs.png)
+- [New Relic — tempo médio por status da ordem de serviço](docs-fase3/evidencias/07-Monitoramento/NR-Media-Status-OS.png)
+- [New Relic — volume diário de ordens de serviço](docs-fase3/evidencias/07-Monitoramento/NR-Vol-OS-dia.png)
+- [Vídeo auxiliar — dashboards, logs e traces](https://vimeo.com/1226611174) — duração informada: 4min08s.
 
 ## Referências
 
