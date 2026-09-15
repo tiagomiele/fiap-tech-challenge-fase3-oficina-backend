@@ -10,9 +10,6 @@ Este documento centraliza links reproduzíveis. URLs do AWS Academy devem ser at
 | Collection Postman | [Fluxos integrados](https://github.com/tiagomiele/fiap-tech-challenge-fase3-oficina-backend/blob/main/tests/postman/oficina-weeks4-5.postman_collection.json) |
 | Ambiente Postman de exemplo | [Homologação](https://github.com/tiagomiele/fiap-tech-challenge-fase3-oficina-backend/blob/main/tests/postman/oficina-homolog.postman_environment.example.json) |
 | OpenAPI da autenticação | [Contrato Auth](https://github.com/tiagomiele/fiap-tech-challenge-fase3-oficina-auth-serverless/blob/main/docs/openapi/oficina-auth.yaml) |
-| Swagger ativo de homologação | Inserir após o deploy |
-| Swagger ativo de produção | Inserir após o deploy |
-| API Gateway ativo | Inserir após o deploy |
 
 ## Testes automatizados
 
@@ -48,16 +45,4 @@ O E2E deve demonstrar autenticação por CPF, geração e uso do JWT, rotas prot
 
 ## Observabilidade
 
-Os locais para anexar dashboards, logs, traces e prints estão em [Observabilidade e evidências](observabilidade-evidencias.md).
-
-## Evidências finais ainda necessárias
-
-- [ ] URLs ativas após a última reconstrução AWS.
-- [ ] Dashboard com volume diário de ordens de serviço.
-- [ ] Dashboard com tempo médio de diagnóstico, execução e finalização.
-- [ ] Dashboard com falhas de ordens e integrações.
-- [ ] Logs JSON com correlação visível.
-- [ ] Trace distribuído entre API Gateway, Lambda e Backend.
-- [ ] Vídeo de até 15 minutos no YouTube ou Vimeo.
-- [ ] Confirmação de `soat-architecture` nos quatro projetos.
-- [ ] PDF único com todos os links da entrega.
+Os locais para anexar dashboards, logs, traces e prints estão em [Observabilidade e evidências](evidencias/07-Monitoramento/observabilidade-evidencias.md).

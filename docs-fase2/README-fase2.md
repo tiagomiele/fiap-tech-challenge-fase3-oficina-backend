@@ -138,7 +138,7 @@ Infrastructure
 
 As dependências apontam para dentro. O domínio não depende de Spring, JPA, Servlet ou infraestrutura.
 
-![103-Desenho-Camadas-Clean-Arch-Projeto.png](../../docs-fase2/01-evidencias-fase-2/103-Desenho-Camadas-Clean-Arch-Projeto.png)
+![103-Desenho-Camadas-Clean-Arch-Projeto.png](01-evidencias-fase-2/103-Desenho-Camadas-Clean-Arch-Projeto.png)
 
 ### Infraestrutura AWS
 
@@ -153,7 +153,7 @@ A infraestrutura utiliza:
 - GHCR para armazenar a imagem Docker;
 - HPA com 2–5 pods.
 
-![101-Desenho-Arquitetura-Visão-Geral-Projeto.png](../../docs-fase2/01-evidencias-fase-2/101-Desenho-Arquitetura-Visão-Geral-Projeto.png)
+![101-Desenho-Arquitetura-Visão-Geral-Projeto.png](01-evidencias-fase-2/101-Desenho-Arquitetura-Visão-Geral-Projeto.png)
 
 ## 5. Tecnologias e pré-requisitos
 
@@ -2115,7 +2115,7 @@ Registre:
 ## 23. Documentação adicional
 
 | Tema | Documento |
-| Documentações Entrega - Fase 1 | [`docs-fase1/README-DOCS.md`](../../docs-fase1/README-DOCS.md) |
-| Documentações Entrega - Fase 2 | [`docs-fase2/`](../../docs-fase2) |
+| Documentações Entrega - Fase 1 | [`docs-fase1/README-DOCS.md`](../docs-fase1/README-DOCS.md) |
+| Documentações Entrega - Fase 2 | [`docs-fase2/`]() |
 
 ---

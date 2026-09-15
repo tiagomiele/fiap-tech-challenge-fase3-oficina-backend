@@ -33,7 +33,7 @@ A evolução atual prioriza requisitos não funcionais e operação em nuvem. O 
 
 ## 3. Jornada principal da Ordem de Serviço
 
-![Jornada principal da Ordem de Serviço](assets/jornada-ordem-servico.png)
+![Jornada principal da Ordem de Serviço](../assets/jornada-ordem-servico.png)
 
 Durante a jornada, a aplicação valida transições de status, propriedade da OS, disponibilidade de peças, composição do orçamento e efeitos financeiros. O histórico de status permite calcular tempos operacionais e demonstrar a evolução do atendimento.
 
@@ -115,4 +115,4 @@ Clean Code e SOLID são princípios aplicados continuamente; não constituem, is
 | Database | Preserva dados operacionais com consistência, privacidade e recuperação. | RDS PostgreSQL privado, segurança, backup, logs, telemetria e outputs. |
 | Kubernetes | Mantém a aplicação disponível, escalável e observável. | VPC, EKS, nodes, add-ons, HPA, New Relic, dashboards e alertas. |
 
-A sequência de implantação e promoção dos quatro projetos está documentada em [CI/CD e promoção](cicd-promocao.md).
+A sequência de implantação e promoção dos quatro projetos está documentada em [CI/CD e promoção](02-cicd/cicd-promocao.md).
