@@ -23,7 +23,7 @@ A entrada utiliza o **Amazon API Gateway**. Uma **Function Serverless** valida o
 
 A evolução também separa aplicação, autenticação, banco e Kubernetes em quatro projetos com pipelines independentes, ambientes de homologação e produção e telemetria centralizada no New Relic.
 
-- [Visão detalhada de negócio, evolução e engenharia](docs/visao-negocio-e-engenharia.md)
+- [Visão detalhada de negócio, evolução e engenharia](docs-fase3/evidencias/visao-negocio-e-engenharia.md)
 
 ## Aplicações da solução
 
@@ -36,7 +36,7 @@ A evolução também separa aplicação, autenticação, banco e Kubernetes em q
 
 ## Modelo arquitetural e práticas
 
-A solução distribui responsabilidades entre quatro repositórios, mas mantém o domínio principal em um **monólito modular**. O Backend aplica **DDD e Clean Architecture em quatro anéis** (`Domain`, `Usecase`, `Adapter` e `Infrastructure`), com dependências apontando para o domínio e limites verificados por ArchUnit.
+A solução distribui responsabilidades entre quatro repositórios. O Backend aplica **DDD e Clean Architecture em quatro anéis** (`Domain`, `Usecase`, `Adapter` e `Infrastructure`), com dependências apontando para o domínio e limites verificados por ArchUnit.
 
 O Auth utiliza camadas leves de domínio, aplicação, handlers e infraestrutura, adequadas às Lambdas. Database e Kubernetes adotam **Infrastructure as Code declarativa**, com Terraform, states separados e plans revisáveis. Clean Code, SOLID, testes automatizados, formatação, análise de segurança, revisão por Pull Request e observabilidade são práticas transversais.
 
@@ -44,13 +44,13 @@ O Auth utiliza camadas leves de domínio, aplicação, handlers e infraestrutura
 
 ## Arquitetura específica do Backend
 
-![Arquitetura integrada da Oficina Fase 3 com ícones dos serviços AWS](docs/assets/arquitetura-integrada-oficina-fase3.png)
+![Arquitetura integrada da Oficina Fase 3 com ícones dos serviços AWS](docs-fase3/assets/arquitetura-integrada-oficina-fase3.png)
 
 O Backend concentra o domínio da oficina. API Gateway, autenticação, banco e plataforma Kubernetes permanecem desacoplados em projetos independentes.
 
-- [Diagrama completo de componentes](docs/architecture/componentes.md)
-- [Sequência de autenticação por CPF](docs/architecture/autenticacao.md)
-- [Sequência de abertura da ordem de serviço](docs/architecture/abertura-ordem-servico.md)
+- [Diagrama completo de componentes](docs-fase3/architecture/componentes.md)
+- [Sequência de autenticação por CPF](docs-fase3/architecture/autenticacao.md)
+- [Sequência de abertura da ordem de serviço](docs-fase3/architecture/abertura-ordem-servico.md)
 
 ## Tecnologias
 
@@ -66,57 +66,143 @@ O Backend concentra o domínio da oficina. API Gateway, autenticação, banco e 
 | Segurança de código e IaC | SBOM CycloneDX, Trivy, Checkov, TFLint, actionlint, ShellCheck e Gitleaks |
 | Observabilidade | New Relic APM, logs JSON, correlação, traces, dashboards, alertas e sintéticos |
 
-## Execução e deploy
-
-A implantação completa deve respeitar a dependência entre os projetos:
+## Estrutura de pastas
 
 ```text
-Kubernetes → Database → Auth → Backend
-→ reaplicar Auth → reaplicar observabilidade → executar E2E
+.
+├── .github/workflows/        # CI, deploy e testes E2E
+├── docs-fase1/               # documentação preservada da Fase 1
+├── docs-fase2/               # documentação preservada da Fase 2
+├── docs-fase3/               # arquitetura, decisões e evidências da Fase 3
+├── k8s/                      # manifests e scripts de implantação do Backend
+├── scripts/                  # configuração e sincronização entre projetos
+├── src/main/java/br/com/oficina/
+│   ├── domain/               # entidades, regras e exceções de negócio
+│   ├── usecase/              # casos de uso e portas
+│   ├── adapter/              # controllers, DTOs, persistência e integrações
+│   └── infrastructure/       # configuração do Spring e composição da aplicação
+├── src/main/resources/
+│   ├── db/migration/         # migrations Flyway V1–V4
+│   ├── application.yml       # configuração da aplicação
+│   └── logback-spring.xml    # logs estruturados
+├── src/test/                 # testes unitários, integração e arquitetura
+├── tests/postman/            # collection E2E integrada
+├── tests/k6/                 # teste de carga smoke
+├── Dockerfile
+├── docker-compose.yml
+└── pom.xml
 ```
 
-- [Ciclos CI/CD de homologação e produção](docs/cicd-promocao.md)
-- [Bootstrap: subir a Oficina Fase 3 na AWS do zero](docs/bootstrap-aws-do-zero.md)
-- [Instruções locais do Backend](https://github.com/tiagomiele/fiap-tech-challenge-fase3-oficina-backend#executar-localmente)
+## Pré-requisitos
 
-Toda alteração nos projetos originais deve passar por Pull Request. O CI valida a mudança; o Terraform Plan antecipa o impacto; o merge dispara o deploy do ambiente correspondente. Produção utiliza configuração e aprovação próprias.
+- Java 21;
+- Docker e Docker Compose;
+- Git;
+- acesso à AWS, ao cluster EKS e aos ambientes GitHub somente para implantação remota.
 
-## Swagger, OpenAPI e Postman
+O Maven Wrapper está incluído; não é necessário instalar Maven globalmente.
 
-- [Swagger e execução local do Backend](https://github.com/tiagomiele/fiap-tech-challenge-fase3-oficina-backend#executar-localmente)
-- [Collection Postman da validação integrada](https://github.com/tiagomiele/fiap-tech-challenge-fase3-oficina-backend/blob/main/tests/postman/oficina-weeks4-5.postman_collection.json)
-- [Contrato OpenAPI da autenticação](https://github.com/tiagomiele/fiap-tech-challenge-fase3-oficina-auth-serverless/blob/main/docs/openapi/oficina-auth.yaml)
+## Executar localmente com Docker
 
-As URLs implantadas no AWS Academy são temporárias. Os links de Swagger e API Gateway ativos devem ser atualizados após cada reconstrução do ambiente.
+```bash
+git clone https://github.com/tiagomiele/fiap-tech-challenge-fase3-oficina-backend.git
+cd fiap-tech-challenge-fase3-oficina-backend
+docker compose up --build
+```
 
-## Evidências
+Serviços locais:
 
-- [Índice de APIs, testes, deploys e E2E](docs/evidencias.md)
-- [Requisitos de observabilidade e locais para anexar evidências](docs/observabilidade-evidencias.md)
-- [Matriz de requisitos acadêmicos](docs/matriz-requisitos.md)
+- API: `http://localhost:8080`;
+- Swagger UI: `http://localhost:8080/swagger-ui.html`;
+- OpenAPI JSON: `http://localhost:8080/v3/api-docs`;
+- healthcheck: `http://localhost:8080/actuator/health`;
+- Adminer: `http://localhost:8081`.
 
-## Decisões arquiteturais
+As credenciais presentes no `docker-compose.yml` destinam-se exclusivamente ao desenvolvimento local. Valores reais devem permanecer em Secrets, GitHub Environments ou HCP Terraform.
 
-### RFCs
+## Executar a aplicação com o Maven Wrapper
 
-- [AWS e estratégia de ambientes](docs/decisions/rfc/0001-aws-e-ambientes.md)
-- [PostgreSQL gerenciado no RDS](docs/decisions/rfc/0002-postgresql-rds.md)
-- [Autenticação por CPF e JWT](docs/decisions/rfc/0003-autenticacao-cpf-jwt.md)
-- [Observabilidade com New Relic](docs/decisions/rfc/0004-observabilidade-new-relic.md)
+Inicie somente o PostgreSQL:
 
-### ADRs
+```bash
+docker compose up -d db
+```
 
-- [Repositórios independentes](docs/decisions/adr/0001-repositorios-independentes.md)
-- [Comunicação assíncrona](docs/decisions/adr/0002-comunicacao-assincrona.md)
-- [Alta disponibilidade e HPA](docs/decisions/adr/0003-alta-disponibilidade-hpa.md)
-- [Logs estruturados e correlação](docs/decisions/adr/0004-logs-correlacao-traces.md)
+Depois execute:
 
-## Entrega acadêmica final
+```bash
+./mvnw spring-boot:run
+```
 
-O PDF enviado ao portal deve centralizar:
+No Windows PowerShell:
 
-1. links dos quatro projetos originais;
-2. links das documentações;
-3. vídeo de até 15 minutos no YouTube ou Vimeo;
-4. evidências de CI/CD, APIs, E2E e New Relic;
-5. confirmação de que `soat-architecture` foi adicionado aos quatro projetos.
+```powershell
+.\mvnw.cmd spring-boot:run
+```
+
+As variáveis disponíveis estão documentadas em [.env.example](.env.example). Não versione arquivos `.env` com valores reais.
+
+## Testes e validações
+
+```bash
+./mvnw -B clean verify spotless:check
+```
+
+A suíte inclui testes unitários, integração, persistência, segurança, contrato e arquitetura. O pipeline também executa SBOM, análise de vulnerabilidades e testes funcionais Postman/Newman.
+
+- [Collection Postman integrada](tests/postman/oficina-weeks4-5.postman_collection.json)
+- [Ambiente Postman de exemplo](tests/postman/oficina-homolog.postman_environment.example.json)
+- [Teste de carga smoke](tests/k6/smoke-load.js)
+
+## Configuração
+
+Principais variáveis:
+
+| Variável | Finalidade |
+|---|---|
+| `DB_URL`, `DB_USER`, `DB_PASSWORD` | conexão PostgreSQL |
+| `JWT_SECRET` | autenticação interna da equipe |
+| `SERVERLESS_JWT_PUBLIC_KEY` | validação dos tokens emitidos pelo Auth |
+| `SERVERLESS_JWT_ISSUER`, `SERVERLESS_JWT_AUDIENCE` | validação do emissor e da audiência |
+| `AUTH_BASE_URL` | URL do Auth Serverless |
+| `NOTIFICATION_ENDPOINT`, `NOTIFICATION_API_KEY` | integração de notificações |
+| `OFICINA_ENVIRONMENT` | identificação do ambiente |
+| `OFICINA_OBSERVABILITY_NEW_RELIC_ENABLED` | habilitação da integração New Relic |
+
+## CI/CD e implantação
+
+| Workflow | Finalidade |
+|---|---|
+| `.github/workflows/ci.yml` | build, testes, cobertura, SBOM e segurança |
+| `.github/workflows/deploy.yml` | build da imagem e implantação por ambiente |
+| `.github/workflows/e2e.yml` | validação funcional e de segurança integrada |
+| `.github/workflows/cd.yml` | compatibilidade com o fluxo de entrega existente |
+
+Fluxo de promoção:
+
+```text
+feature → Pull Request → homolog → Pull Request → main
+```
+
+- Pull Requests executam validações sem implantar produção;
+- `homolog` publica o ambiente de homologação;
+- `main` promove a versão validada para produção;
+- commits diretos, exclusões e force pushes são controlados pelos rulesets;
+- a implantação completa respeita a ordem `Kubernetes → Database → Auth → Backend`.
+
+- [Fluxo completo de CI/CD](docs-fase3/evidencias/02-cicd/cicd-promocao.md)
+- [Bootstrap da solução na AWS](docs-fase3/bootstrap-aws-do-zero.md)
+
+## Documentação e evidências
+
+- [Requisitos obrigatórios da Fase 3](README-requisitos-obrigatorios-fase3.md)
+
+## Projetos relacionados
+
+- [Auth Serverless](https://github.com/tiagomiele/fiap-tech-challenge-fase3-oficina-auth-serverless)
+- [Database Infra](https://github.com/tiagomiele/fiap-tech-challenge-fase3-oficina-database-infra)
+- [Kubernetes Infra](https://github.com/tiagomiele/fiap-tech-challenge-fase3-oficina-kubernetes-infra)
+
+## Licença
+
+Consulte o arquivo [LICENSE](LICENSE).
