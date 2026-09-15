@@ -56,34 +56,3 @@ A relação abaixo registra os runs mais recentes identificados durante a revis�
 
 1. CI em `main` — evento `push`, conclusão `success`: [run 34800781548](https://github.com/tiagomiele/fiap-tech-challenge-fase3-oficina-backend/actions/runs/34800781548).
 2. CD em `main` — evento `push`, conclusão `success`: [run 34800781717](https://github.com/tiagomiele/fiap-tech-challenge-fase3-oficina-backend/actions/runs/34800781717).
-
-<melhor e colocar os links>
-# videos auxilares demonstrando a execução do CI/CD:
----- HOMOLOGAÇÃO
-deploy-fiap-tech-challenge-fase3-oficina-kubernetes-infra
-https://vimeo.com/1226451132
-
-deploy-fiap-tech-challenge-fase3-oficina-database-infra
-https://vimeo.com/1226455057
-
-deploy-fiap-tech-challenge-fase3-oficina-auth-serverless
-https://vimeo.com/1226459464
-
-deploy-fiap-tech-challenge-fase3-oficina-backend
-https://vimeo.com/1226462726
-
----- PRODUCAO
-prd-deploy-fiap-tech-challenge-fase3-oficina-kubernetes-infra
-https://vimeo.com/1226467938
-
-prd-deploy-fiap-tech-challenge-fase3-oficina-database-infra
-https://vimeo.com/1226471444
-
-prd-deploy-fiap-tech-challenge-fase3-oficina-auth-serverless
-https://vimeo.com/1226473922
-
-prd-deploy-fiap-tech-challenge-fase3-oficina-backend
-https://vimeo.com/1226476782
-
-
-
