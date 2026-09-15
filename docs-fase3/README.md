@@ -44,5 +44,4 @@ O README principal apresenta apenas o caminho rápido. Os detalhes técnicos e o
 
 ## Histórico
 
-- [Guia completo preservado da Fase 2](fase2/README-fase2.md)
-- [Evidências da Fase 2](../docs-fase2/01-evidencias-fase-2/)
+- [Guia completo preservado da Fase 2](../docs-fase2/README-fase2.md)

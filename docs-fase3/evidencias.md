@@ -48,7 +48,7 @@ O E2E deve demonstrar autenticação por CPF, geração e uso do JWT, rotas prot
 
 ## Observabilidade
 
-Os locais para anexar dashboards, logs, traces e prints estão em [Observabilidade e evidências](observabilidade-evidencias.md).
+Os locais para anexar dashboards, logs, traces e prints estão em [Observabilidade e evidências](evidencias/07-Monitoramento/observabilidade-evidencias.md).
 
 ## Evidências finais ainda necessárias
 

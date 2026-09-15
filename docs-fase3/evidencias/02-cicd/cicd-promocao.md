@@ -26,7 +26,7 @@ Explicar quando cada pipeline é iniciada, por que ela existe e como uma versão
 
 ## Ciclo completo de homologação
 
-![Ciclo completo de homologação](assets/cicd-homologacao.png)
+![Ciclo completo de homologação](../../assets/cicd-homologacao.png)
 
 Cada projeto possui PR e workflow próprios. As setas entre Kubernetes, Database, Auth e Backend representam a ordem operacional obrigatória, não um único pipeline entre repositórios.
 
@@ -41,7 +41,7 @@ Cada projeto possui PR e workflow próprios. As setas entre Kubernetes, Database
 
 ## Promoção para produção
 
-![Promoção automatizada para produção](assets/cicd-producao.png)
+![Promoção automatizada para produção](../../assets/cicd-producao.png)
 
 A promoção também ocorre separadamente nos quatro projetos. O responsável acompanha cada PR, merge e deploy antes de iniciar o projeto seguinte.
 

@@ -48,5 +48,5 @@ Não publique CPF completo, JWT, senhas, chaves, tokens, conexão JDBC ou conte�
 ## Referências
 
 - [Infraestrutura e observabilidade](https://github.com/tiagomiele/kubernetes/blob/documentation/docs/infraestrutura-observabilidade.md)
-- [RFC de observabilidade](decisions/rfc/0004-observabilidade-new-relic.md)
-- [ADR de logs e correlação](decisions/adr/0004-logs-correlacao-traces.md)
+- [RFC de observabilidade](../../decisions/rfc/0004-observabilidade-new-relic.md)
+- [ADR de logs e correlação](../../decisions/adr/0004-logs-correlacao-traces.md)

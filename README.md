@@ -23,7 +23,7 @@ A entrada utiliza o **Amazon API Gateway**. Uma **Function Serverless** valida o
 
 A evolução também separa aplicação, autenticação, banco e Kubernetes em quatro projetos com pipelines independentes, ambientes de homologação e produção e telemetria centralizada no New Relic.
 
-- [Visão detalhada de negócio, evolução e engenharia](docs/visao-negocio-e-engenharia.md)
+- [Visão detalhada de negócio, evolução e engenharia](docs-fase3/evidencias/visao-negocio-e-engenharia.md)
 
 ## Aplicações da solução
 
@@ -44,13 +44,13 @@ O Auth utiliza camadas leves de domínio, aplicação, handlers e infraestrutura
 
 ## Arquitetura específica do Backend
 
-![Arquitetura integrada da Oficina Fase 3 com ícones dos serviços AWS](docs/assets/arquitetura-integrada-oficina-fase3.png)
+![Arquitetura integrada da Oficina Fase 3 com ícones dos serviços AWS](docs-fase3/assets/arquitetura-integrada-oficina-fase3.png)
 
 O Backend concentra o domínio da oficina. API Gateway, autenticação, banco e plataforma Kubernetes permanecem desacoplados em projetos independentes.
 
-- [Diagrama completo de componentes](docs/architecture/componentes.md)
-- [Sequência de autenticação por CPF](docs/architecture/autenticacao.md)
-- [Sequência de abertura da ordem de serviço](docs/architecture/abertura-ordem-servico.md)
+- [Diagrama completo de componentes](docs-fase3/architecture/componentes.md)
+- [Sequência de autenticação por CPF](docs-fase3/architecture/autenticacao.md)
+- [Sequência de abertura da ordem de serviço](docs-fase3/architecture/abertura-ordem-servico.md)
 
 ## Tecnologias
 
@@ -75,8 +75,8 @@ Kubernetes → Database → Auth → Backend
 → reaplicar Auth → reaplicar observabilidade → executar E2E
 ```
 
-- [Ciclos CI/CD de homologação e produção](docs/cicd-promocao.md)
-- [Bootstrap: subir a Oficina Fase 3 na AWS do zero](docs/bootstrap-aws-do-zero.md)
+- [Ciclos CI/CD de homologação e produção](docs-fase3/evidencias/02-cicd/cicd-promocao.md)
+- [Bootstrap: subir a Oficina Fase 3 na AWS do zero](docs-fase3/bootstrap-aws-do-zero.md)
 - [Instruções locais do Backend](https://github.com/tiagomiele/fiap-tech-challenge-fase3-oficina-backend#executar-localmente)
 
 Toda alteração nos projetos originais deve passar por Pull Request. O CI valida a mudança; o Terraform Plan antecipa o impacto; o merge dispara o deploy do ambiente correspondente. Produção utiliza configuração e aprovação próprias.
@@ -91,32 +91,30 @@ As URLs implantadas no AWS Academy são temporárias. Os links de Swagger e API 
 
 ## Evidências
 
-- [Índice de APIs, testes, deploys e E2E](docs/evidencias.md)
-- [Requisitos de observabilidade e locais para anexar evidências](docs/observabilidade-evidencias.md)
-- [Matriz de requisitos acadêmicos](docs/matriz-requisitos.md)
+- [Índice de APIs, testes, deploys e E2E](docs-fase3/evidencias.md)
+- [Requisitos de observabilidade e locais para anexar evidências](docs-fase3/evidencias/07-Monitoramento/observabilidade-evidencias.md)
+- [Matriz de requisitos acadêmicos](docs-fase3/matriz-requisitos.md)
 
 ## Decisões arquiteturais
 
 ### RFCs
 
-- [AWS e estratégia de ambientes](docs/decisions/rfc/0001-aws-e-ambientes.md)
-- [PostgreSQL gerenciado no RDS](docs/decisions/rfc/0002-postgresql-rds.md)
-- [Autenticação por CPF e JWT](docs/decisions/rfc/0003-autenticacao-cpf-jwt.md)
-- [Observabilidade com New Relic](docs/decisions/rfc/0004-observabilidade-new-relic.md)
+- [AWS e estratégia de ambientes](docs-fase3/decisions/rfc/0001-aws-e-ambientes.md)
+- [PostgreSQL gerenciado no RDS](docs-fase3/decisions/rfc/0002-postgresql-rds.md)
+- [Autenticação por CPF e JWT](docs-fase3/decisions/rfc/0003-autenticacao-cpf-jwt.md)
+- [Observabilidade com New Relic](docs-fase3/decisions/rfc/0004-observabilidade-new-relic.md)
 
 ### ADRs
 
-- [Repositórios independentes](docs/decisions/adr/0001-repositorios-independentes.md)
-- [Comunicação assíncrona](docs/decisions/adr/0002-comunicacao-assincrona.md)
-- [Alta disponibilidade e HPA](docs/decisions/adr/0003-alta-disponibilidade-hpa.md)
-- [Logs estruturados e correlação](docs/decisions/adr/0004-logs-correlacao-traces.md)
+- [Repositórios independentes](docs-fase3/decisions/adr/0001-repositorios-independentes.md)
+- [Comunicação assíncrona](docs-fase3/decisions/adr/0002-comunicacao-assincrona.md)
+- [Alta disponibilidade e HPA](docs-fase3/decisions/adr/0003-alta-disponibilidade-hpa.md)
+- [Logs estruturados e correlação](docs-fase3/decisions/adr/0004-logs-correlacao-traces.md)
 
-## Entrega acadêmica final
+## Entrega final do trabalho e evidencias sucinta dos requisitos obrigatórios
 
-O PDF enviado ao portal deve centralizar:
+Dentro do reademe abaixo, você encontrará a lista de requisitos obrigatórios da Fase 3, com links para evidências e documentação detalhada.
+Dentro do arquivo encontrara uma versão sucinta, objetiva das implementações técnicas e das evidencias de execuções.
+<validar se está orgnizado de acordo com os critérios de entrega final>
 
-1. links dos quatro projetos originais;
-2. links das documentações;
-3. vídeo de até 15 minutos no YouTube ou Vimeo;
-4. evidências de CI/CD, APIs, E2E e New Relic;
-5. confirmação de que `soat-architecture` foi adicionado aos quatro projetos.
+[README-requisitos-obrigatorios-fase-3.md](README-requisitos-obrigatorios-fase-3.md)
