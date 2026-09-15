@@ -20,7 +20,6 @@ A autenticação por CPF valida a existência e o status ativo do cliente, emite
 Os links abaixo comprovam como o API Gateway, as funções serverless e o contrato de autenticação foram definidos na aplicação.
 
 - [Arquitetura do Auth](https://github.com/tiagomiele/fiap-tech-challenge-fase3-oficina-auth-serverless/blob/main/docs/arquitetura.md)
-- [RFC da autenticação por CPF e JWT](https://github.com/tiagomiele/fiap-tech-challenge-fase3-oficina-backend/blob/main/docs/decisions/rfc/0003-autenticacao-cpf-jwt.md)
 - [Terraform do API Gateway](https://github.com/tiagomiele/fiap-tech-challenge-fase3-oficina-auth-serverless/blob/main/apigateway.tf)
 - [Terraform das funções Lambda](https://github.com/tiagomiele/fiap-tech-challenge-fase3-oficina-auth-serverless/blob/main/lambda.tf)
 - [Contrato OpenAPI do Auth](https://github.com/tiagomiele/fiap-tech-challenge-fase3-oficina-auth-serverless/blob/main/docs/openapi/oficina-auth.yaml)
@@ -176,10 +175,11 @@ Os links abaixo comprovam a conteinerização e a configuração da aplicação 
 - [Dockerfile do Backend](https://github.com/tiagomiele/fiap-tech-challenge-fase3-oficina-backend/blob/main/Dockerfile)
 - [Deployment Kubernetes](https://github.com/tiagomiele/fiap-tech-challenge-fase3-oficina-backend/blob/main/k8s/app-deployment.yaml)
 - [Service Kubernetes](https://github.com/tiagomiele/fiap-tech-challenge-fase3-oficina-backend/blob/main/k8s/app-service.yaml)
-- [Horizontal Pod Autoscaler](https://github.com/tiagomiele/fiap-tech-challenge-fase3-oficina-backend/blob/main/k8s/hpa.yaml)
+- [HPA-Horizontal Pod Autoscaler](https://github.com/tiagomiele/fiap-tech-challenge-fase3-oficina-backend/blob/main/k8s/hpa.yaml)
 - [Collection Postman](https://github.com/tiagomiele/fiap-tech-challenge-fase3-oficina-backend/blob/main/tests/postman/oficina-weeks4-5.postman_collection.json)
 - [Probes e réplicas no Deployment](https://github.com/tiagomiele/fiap-tech-challenge-fase3-oficina-backend/blob/main/k8s/app-deployment.yaml)
 - [PodDisruptionBudget](https://github.com/tiagomiele/fiap-tech-challenge-fase3-oficina-backend/blob/main/k8s/pdb.yaml)
+
   As réplicas, probes e o PodDisruptionBudget são evidências complementares de alta disponibilidade e resiliência. O HPA comprova a estratégia de escalabilidade exigida.
 
 ### Evidências de execução da implantação
@@ -201,7 +201,7 @@ O PostgreSQL oferece transações ACID, integridade referencial, maturidade e su
 
 Os links abaixo comprovam a implementação, a modelagem e as decisões técnicas do banco gerenciado.
 
-- [Justificativa PostgreSQL/RDS — ADR 0001](docs-fase3/evidencias/06-banco-de-dados/ADR_0001_Banco_Relacional_PostgreSQL.docx)
+- [Justificativa PostgreSQL/RDS — ADR 0001 (arquivo.docx)](docs-fase3/evidencias/06-banco-de-dados/ADR_0001_Banco_Relacional_PostgreSQL.docx)
 - [Diagrama entidade-relacionamento](https://github.com/tiagomiele/fiap-tech-challenge-fase3-oficina-database-infra/blob/homolog/docs/assets/modelo-relacional-database.png)
 - [Modelo relacional](https://github.com/tiagomiele/fiap-tech-challenge-fase3-oficina-database-infra/blob/main/docs/modelo-relacional.md)
 - [Índices e desempenho](https://github.com/tiagomiele/fiap-tech-challenge-fase3-oficina-database-infra/blob/main/docs/indices-desempenho.md)
@@ -215,7 +215,7 @@ Os links abaixo comprovam a implementação, a modelagem e as decisões técnica
 
 ### Evidência de execução da conexão ao PostgreSQL
 
-- [Conexão aos bancos PostgreSQL de homologação e produção](docs-fase3/evidencias/06-banco-de-dados/Evidencia-Conexao-BD.docx)
+- [Conexão aos bancos PostgreSQL de homologação e produção (arquivo.docx)](docs-fase3/evidencias/06-banco-de-dados/Evidencia-Conexao-BD.docx)
 
 ## 7. Monitoramento, observabilidade e logs
 
@@ -249,17 +249,17 @@ A documentação apresenta a arquitetura, os fluxos principais e as decisões t�
 
 ### Documentação técnica e decisões arquiteturais
 
-| Documento técnico | Link                                                                                                                                                                       |
-|---|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Diagrama de componentes | [componentes.md](https://github.com/tiagomiele/fiap-tech-challenge-fase3-oficina-backend/blob/main/docs/architecture/componentes.md)                                       |
-| Sequência de autenticação | [autenticacao.md](https://github.com/tiagomiele/fiap-tech-challenge-fase3-oficina-backend/blob/main/docs/architecture/autenticacao.md)                                     |
-| Sequência de abertura da OS | [abertura-ordem-servico.md](https://github.com/tiagomiele/fiap-tech-challenge-fase3-oficina-backend/blob/main/docs/architecture/abertura-ordem-servico.md)                 |
-| RFCs | [docs/decisions/rfc](https://github.com/tiagomiele/fiap-tech-challenge-fase3-oficina-backend/tree/main/docs/decisions/rfc)                                                 |
-| ADRs | [docs/decisions/adr](https://github.com/tiagomiele/fiap-tech-challenge-fase3-oficina-backend/tree/main/docs/decisions/adr)                                                 |
-| Modelo relacional | [modelo-relacional.md](https://github.com/tiagomiele/fiap-tech-challenge-fase3-oficina-database-infra/blob/main/docs/modelo-relacional.md)                                 |
-| Diagrama ER | [diagrama entidade-relacionamento](https://github.com/tiagomiele/fiap-tech-challenge-fase3-oficina-database-infra/blob/homolog/docs/assets/modelo-relacional-database.png) |
-| Arquitetura do Auth | [arquitetura.md](https://github.com/tiagomiele/fiap-tech-challenge-fase3-oficina-auth-serverless/blob/main/docs/arquitetura.md)                                            |
-| Infraestrutura e observabilidade | [infraestrutura-observabilidade.md](https://github.com/tiagomiele/fiap-tech-challenge-fase3-oficina-kubernetes-infra/blob/main/docs/infraestrutura-observabilidade.md)     |
+| Documento técnico | Link                                                                                                                                                             |
+|---|------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Diagrama de componentes | [componentes.md](https://github.com/tiagomiele/fiap-tech-challenge-fase3-oficina-backend/blob/main/docs-fase3/architecture/componentes.md)                       |
+| Sequência de autenticação | [autenticacao.md](https://github.com/tiagomiele/fiap-tech-challenge-fase3-oficina-backend/blob/main/docs-fase3/architecture/autenticacao.md)                     |
+| Sequência de abertura da OS | [abertura-ordem-servico.md](https://github.com/tiagomiele/fiap-tech-challenge-fase3-oficina-backend/blob/main/docs-fase3/architecture/abertura-ordem-servico.md) |
+| RFCs | [docs/decisions/rfc](https://github.com/tiagomiele/fiap-tech-challenge-fase3-oficina-backend/tree/main/docs-fase3/decisions/rfc)                                 |
+| ADRs | [docs/decisions/adr](https://github.com/tiagomiele/fiap-tech-challenge-fase3-oficina-backend/tree/main/docs-fase3/decisions/adr)                                 |
+| Diagrama ER | [diagrama entidade-relacionamento](docs-fase3/assets/modelo-relacional-database.png)                                                                             |
+| Arquitetura do Auth | [Arquitetura do Auth](docs-fase3/assets/arquitetura-integrada-oficina-fase3.png)                                                                                 |
+| Infraestrutura e observabilidade | [docs-fase3/evidencias/07-Monitoramento](docs-fase3/evidencias/07-Monitoramento)                                                                                        |
+
 
 ## 9. READMEs para os quatro repositórios
 
